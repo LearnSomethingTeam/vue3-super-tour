@@ -26,8 +26,8 @@ export interface Step {
   params?: {
     placement?: Placement;
   },
-  duration?: unknown;
-  offset?: unknown;
+  duration?: number;
+  offset?: number;
   before?: (triggeredBy: 'start' | 'previous' | 'next') => Promise<void>;
 }
 
