@@ -43,6 +43,7 @@ import type { ButtonID, Step } from '../shared/types';
 
 export default defineComponent({
   name: 'v-step',
+  emits: ['stop', 'targetNotFound'],
   props: {
     step: {
       type: Object as PropType<Step>,
@@ -52,9 +53,6 @@ export default defineComponent({
       type: Function as PropType<(evt?: MouseEvent) => void>
     },
     nextStep: {
-      type: Function as PropType<(evt?: MouseEvent) => void>
-    },
-    stop: {
       type: Function as PropType<(evt?: MouseEvent) => void>
     },
     skip: {
@@ -91,8 +89,7 @@ export default defineComponent({
       type: Boolean
     }
   },
-  emits: ['targetNotFound'],
-  setup(props, context) {
+  setup(props, ctx) {
     const hash = sum(props.step.target)
     const targetElement = document.querySelector(props.step.target) as HTMLElement
 
@@ -125,9 +122,9 @@ export default defineComponent({
         if (props.debug) {
           console.error('[Vue Tour] The target element ' + props.step.target + ' of .v-step[id="' + hash + '"] does not exist!')
         }
-        context.emit('targetNotFound', props.step)
+        ctx.emit('targetNotFound', props.step)
         if (props.stopOnFail) {
-          props.stop?.();
+          ctx.emit('stop');
         }
       }
     }
