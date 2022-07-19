@@ -30,7 +30,7 @@
         :highlight="highlight"
         :stop-on-fail="stopOnTargetNotFound"
         :debug="debug"
-        @targetNotFound="$emit('targetNotFound', $event)"
+        @targetNotFound="$emit('target-not-found', $event)"
       >
         <!--<div v-if="index === 2" slot="actions">
           <a @click="nextStep">Next step</a>
@@ -44,10 +44,11 @@
 import { ref, computed, onMounted, onBeforeUnmount, getCurrentInstance, defineComponent, type PropType } from 'vue'
 
 import type { ButtonID, KeyID, Step, Tour } from '../shared/types';
-import { DEFAULT_CALLBACKS, KEYS } from '../shared/constants'
+import { KEYS } from '../shared/constants'
 
 export default defineComponent({
   name: 'v-tour',
+  emits: ['start', 'stop', 'skip', 'finish', 'previous-step', 'next-step', 'target-not-found'],
   props: {
     steps: {
       type: Array as PropType<Step[]>,
@@ -85,20 +86,9 @@ export default defineComponent({
       type: Boolean,
       default: true,
     },
-    callbacks: {
-      type: Object as PropType<Partial<typeof DEFAULT_CALLBACKS>>,
-      default: () => { return DEFAULT_CALLBACKS }
-    }
   },
   setup (props, ctx) {
     const currentStep = ref(-1)
-
-    const customCallbacks = computed(() => {
-      return {
-        ...DEFAULT_CALLBACKS,
-        ...props.callbacks
-      }
-    })
 
     const isRunning = computed(() => currentStep.value > -1 && currentStep.value < numberOfSteps.value)
 
@@ -116,7 +106,7 @@ export default defineComponent({
       const step = props.steps[startStepIdx]
       let process = () => new Promise<void>((resolve, reject) => {
         setTimeout(() => {
-          customCallbacks.value.onStart()
+          ctx.emit('start');
           currentStep.value = startStepIdx
           resolve()
         }, props.startTimeout)
@@ -135,7 +125,7 @@ export default defineComponent({
     const previousStep = async () => {
       let futureStep = currentStep.value - 1
       let process = () => new Promise<void>((resolve, reject) => {
-        customCallbacks.value.onPreviousStep(currentStep.value)
+        ctx.emit('previous-step', currentStep.value)
         currentStep.value = futureStep
         resolve()
       })
@@ -156,7 +146,7 @@ export default defineComponent({
     const nextStep = async () => {
       let futureStep = currentStep.value + 1
       let process = () => new Promise<void>((resolve, reject) => {
-        customCallbacks.value.onNextStep(currentStep.value)
+        ctx.emit('next-step', currentStep.value)
         currentStep.value = futureStep
         resolve()
       })
@@ -175,18 +165,18 @@ export default defineComponent({
     }
 
     const stop = () => {
-      customCallbacks.value.onStop()
+      ctx.emit('stop');
       document.body.classList.remove('v-tour--active')
       currentStep.value = -1
     }
 
     const skip = () => {
-      customCallbacks.value.onSkip()
+      ctx.emit('skip');
       stop()
     }
 
     const finish = () => {
-      customCallbacks.value.onFinish()
+      ctx.emit('finish');
       stop()
     }
 

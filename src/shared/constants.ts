@@ -1,13 +1,5 @@
 import type { StepOptions } from "./types"
 
-export const DEFAULT_CALLBACKS = {
-  onStart: () => {},
-  onPreviousStep: (currentStep: number) => {},
-  onNextStep: (currentStep: number) => {},
-  onStop: () => {},
-  onSkip: () => {},
-  onFinish: () => {}
-}
 
 export const HIGHLIGHT = {
   CLASSES: {
