@@ -19,10 +19,10 @@
 
       <slot name="actions">
         <div class="v-step__buttons">
-          <button @click.prevent="skip" v-if="!isLast && buttons.buttonSkip" class="v-step__button v-step__button-skip">{{ buttons.buttonSkip }}</button>
-          <button @click.prevent="previousStep" v-if="!isFirst && buttons.buttonPrevious" class="v-step__button v-step__button-previous">{{ buttons.buttonPrevious }}</button>
-          <button @click.prevent="nextStep" v-if="!isLast && buttons.buttonNext" class="v-step__button v-step__button-next">{{ buttons.buttonNext }}</button>
-          <button @click.prevent="finish" v-if="isLast && buttons.buttonStop" class="v-step__button v-step__button-stop">{{ buttons.buttonStop }}</button>
+          <button @click.prevent="$emit('skip')" v-if="!isLast && buttons.buttonSkip" class="v-step__button v-step__button-skip">{{ buttons.buttonSkip }}</button>
+          <button @click.prevent="$emit('previous-step')" v-if="!isFirst && buttons.buttonPrevious" class="v-step__button v-step__button-previous">{{ buttons.buttonPrevious }}</button>
+          <button @click.prevent="$emit('next-step')" v-if="!isLast && buttons.buttonNext" class="v-step__button v-step__button-next">{{ buttons.buttonNext }}</button>
+          <button @click.prevent="$emit('finish')" v-if="isLast && buttons.buttonStop" class="v-step__button v-step__button-stop">{{ buttons.buttonStop }}</button>
         </div>
       </slot>
 
@@ -43,23 +43,11 @@ import type { ButtonID, Step } from '../shared/types';
 
 export default defineComponent({
   name: 'v-step',
-  emits: ['stop', 'target-not-found'],
+  emits: ['stop', 'finish', 'skip', 'previous-step', 'next-step', 'target-not-found'],
   props: {
     step: {
       type: Object as PropType<Step>,
       required: true,
-    },
-    previousStep: {
-      type: Function as PropType<(evt?: MouseEvent) => void>
-    },
-    nextStep: {
-      type: Function as PropType<(evt?: MouseEvent) => void>
-    },
-    skip: {
-      type: Function as PropType<(evt?: MouseEvent) => void>,
-    },
-    finish: {
-      type: Function as PropType<(evt?: MouseEvent) => void>,
     },
     isFirst: {
       type: Boolean
