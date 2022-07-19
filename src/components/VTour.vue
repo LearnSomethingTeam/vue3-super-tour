@@ -13,7 +13,7 @@
       :labels="customOptions.labels"
       :enabled-buttons="customOptions.enabledButtons"
       :highlight="highlight"
-      :debug="customOptions.debug"
+      :debug="debug"
     >
       <!--Default slot {{ currentStep }}-->
       <v-step
@@ -31,7 +31,7 @@
         :enabled-buttons="customOptions.enabledButtons"
         :highlight="highlight"
         :stop-on-fail="customOptions.stopOnTargetNotFound"
-        :debug="customOptions.debug"
+        :debug="debug"
         @targetNotFound="$emit('targetNotFound', $event)"
       >
         <!--<div v-if="index === 2" slot="actions">
@@ -63,10 +63,8 @@ export default defineComponent({
       type: Object as PropType<Partial<Options>>,
       default: () => { return DEFAULT_OPTIONS }
     },
-    highlight: {
-      type: Boolean,
-      default: false,
-    },
+    debug: Boolean,
+    highlight: Boolean,
     callbacks: {
       type: Object as PropType<Partial<typeof DEFAULT_CALLBACKS>>,
       default: () => { return DEFAULT_CALLBACKS }
@@ -180,7 +178,7 @@ export default defineComponent({
     }
 
     const handleKeyup = (e: KeyboardEvent) => {
-      if (customOptions.value.debug) {
+      if (props.debug) {
         console.log('[Vue Tour] A keyup event occured:', e)
       }
       switch (e.keyCode) {

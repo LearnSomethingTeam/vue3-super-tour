@@ -29,7 +29,6 @@ export const DEFAULT_OPTIONS: Options = {
     ARROW_RIGHT: true,
     ARROW_LEFT: true
   },
-  debug: false
 }
 
 export const HIGHLIGHT = {
