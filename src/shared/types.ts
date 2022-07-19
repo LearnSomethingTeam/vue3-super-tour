@@ -2,17 +2,11 @@ import type { Modifier, Placement } from '@popperjs/core';
 
 export type ButtonID = 'buttonSkip' | 'buttonPrevious' | 'buttonNext' | 'buttonStop';
 
+export type KeyID = 'ESCAPE' | 'ARROW_LEFT' | 'ARROW_RIGHT';
+
 export type EnabledButtons = Record<ButtonID, boolean>;
 
 export type Labels = Record<ButtonID, string>;
-
-export interface Options {
-  enabledNavigationKeys?: {
-    ESCAPE: boolean;
-    ARROW_RIGHT: boolean;
-    ARROW_LEFT: boolean;
-  };
-}
 
 export interface StepOptions {
   modifiers?: Array<Partial<Modifier<any,any>>>;
@@ -37,7 +31,6 @@ export interface Tour {
   step: Step;
   start: (startStep: string) => Promise<void>;
   isRunning: boolean;
-  customOptions: Options;
   currentStep: number;
   isFirst: boolean;
   isLast: boolean;

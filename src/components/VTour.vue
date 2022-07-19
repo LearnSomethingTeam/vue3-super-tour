@@ -43,8 +43,8 @@
 <script lang="ts">
 import { ref, computed, onMounted, onBeforeUnmount, getCurrentInstance, defineComponent, type PropType } from 'vue'
 
-import type { ButtonID, Options, Step } from '../shared/types';
-import { DEFAULT_CALLBACKS, DEFAULT_OPTIONS, KEYS } from '../shared/constants'
+import type { ButtonID, KeyID, Step } from '../shared/types';
+import { DEFAULT_CALLBACKS, KEYS } from '../shared/constants'
 
 export default defineComponent({
   name: 'v-tour',
@@ -57,10 +57,6 @@ export default defineComponent({
       type: String,
       required: true,
     },
-    options: {
-      type: Object as PropType<Partial<Options>>,
-      default: () => { return DEFAULT_OPTIONS }
-    },
     buttons: {
       type: Object as PropType<Record<ButtonID, string | false>>,
       default: {
@@ -71,6 +67,14 @@ export default defineComponent({
       },
     },
     debug: Boolean,
+    keys: {
+      type: Object as PropType<Record<KeyID, boolean>>,
+      default: {
+        ESCAPE: true,
+        ARROW_RIGHT: true,
+        ARROW_LEFT: true
+      }
+    },
     highlight: Boolean,
     startTimeout: {
       type: Number,
@@ -88,13 +92,6 @@ export default defineComponent({
   },
   setup (props, ctx) {
     const currentStep = ref(-1)
-
-    const customOptions = computed(() => {
-      return {
-        ...DEFAULT_OPTIONS,
-        ...props.options
-      }
-    })
 
     const customCallbacks = computed(() => {
       return {
@@ -199,25 +196,20 @@ export default defineComponent({
       }
       switch (e.keyCode) {
         case KEYS.ARROW_RIGHT:
-          isKeyEnabled('ARROW_RIGHT') && nextStep()
+          props.keys.ARROW_RIGHT && nextStep()
           break
         case KEYS.ARROW_LEFT:
-          isKeyEnabled('ARROW_LEFT') && previousStep()
+          props.keys.ARROW_LEFT && previousStep()
           break
         case KEYS.ESCAPE:
-          isKeyEnabled('ESCAPE') && stop()
+          props.keys.ESCAPE && stop()
           break
       }
     }
 
-    const isKeyEnabled = (key: 'ESCAPE' | 'ARROW_LEFT' | 'ARROW_RIGHT') => {
-      const { enabledNavigationKeys } = customOptions.value
-      return enabledNavigationKeys?.hasOwnProperty(key) ? enabledNavigationKeys[key] : true
-    }
-
     onMounted(() => {
       const app = getCurrentInstance()
-      app!.appContext.config.globalProperties.$tours[props.name] = { step, start, isRunning, customOptions, currentStep, isFirst, isLast, previousStep, nextStep, stop, skip, finish }
+      app!.appContext.config.globalProperties.$tours[props.name] = { step, start, isRunning, currentStep, isFirst, isLast, previousStep, nextStep, stop, skip, finish }
       if (props.useKeyboardNavigation) {
         window.addEventListener('keyup', handleKeyup)
       }
@@ -229,7 +221,7 @@ export default defineComponent({
       }
     })
 
-    return { customOptions, currentStep, isFirst, isLast, previousStep, nextStep, stop, skip, finish }
+    return { currentStep, isFirst, isLast, previousStep, nextStep, stop, skip, finish }
   }
 })
 </script>

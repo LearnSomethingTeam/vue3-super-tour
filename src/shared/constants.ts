@@ -1,4 +1,4 @@
-import type { Options, StepOptions } from "./types"
+import type { StepOptions } from "./types"
 
 export const DEFAULT_CALLBACKS = {
   onStart: () => {},
@@ -7,14 +7,6 @@ export const DEFAULT_CALLBACKS = {
   onStop: () => {},
   onSkip: () => {},
   onFinish: () => {}
-}
-
-export const DEFAULT_OPTIONS: Options = {
-  enabledNavigationKeys: {
-    ESCAPE: true,
-    ARROW_RIGHT: true,
-    ARROW_LEFT: true
-  },
 }
 
 export const HIGHLIGHT = {
