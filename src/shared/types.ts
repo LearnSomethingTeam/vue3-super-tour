@@ -10,7 +10,6 @@ export interface Options {
   labels?: Labels;
   enabledButtons?: EnabledButtons;
   startTimeout: number;
-  useKeyboardNavigation: boolean;
   enabledNavigationKeys?: {
     ESCAPE: boolean;
     ARROW_RIGHT: boolean;

@@ -23,7 +23,6 @@ export const DEFAULT_OPTIONS: Options = {
     buttonStop: true
   },
   startTimeout: 0,
-  useKeyboardNavigation: true,
   enabledNavigationKeys: {
     ESCAPE: true,
     ARROW_RIGHT: true,

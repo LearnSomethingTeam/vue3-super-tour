@@ -66,6 +66,10 @@ export default defineComponent({
     debug: Boolean,
     highlight: Boolean,
     stopOnTargetNotFound: Boolean,
+    useKeyboardNavigation: {
+      type: Boolean,
+      default: true,
+    },
     callbacks: {
       type: Object as PropType<Partial<typeof DEFAULT_CALLBACKS>>,
       default: () => { return DEFAULT_CALLBACKS }
@@ -203,13 +207,13 @@ export default defineComponent({
     onMounted(() => {
       const app = getCurrentInstance()
       app!.appContext.config.globalProperties.$tours[props.name] = { step, start, isRunning, customOptions, currentStep, isFirst, isLast, previousStep, nextStep, stop, skip, finish }
-      if (customOptions.value.useKeyboardNavigation) {
+      if (props.useKeyboardNavigation) {
         window.addEventListener('keyup', handleKeyup)
       }
     })
 
     onBeforeUnmount(() => {
-      if (customOptions.value.useKeyboardNavigation) {
+      if (props.useKeyboardNavigation) {
         window.removeEventListener('keyup', handleKeyup)
       }
     })
