@@ -65,6 +65,10 @@ export default defineComponent({
     },
     debug: Boolean,
     highlight: Boolean,
+    startTimeout: {
+      type: Number,
+      default: 0,
+    },
     stopOnTargetNotFound: Boolean,
     useKeyboardNavigation: {
       type: Boolean,
@@ -111,7 +115,7 @@ export default defineComponent({
           customCallbacks.value.onStart()
           currentStep.value = startStepIdx
           resolve()
-        }, customOptions.value.startTimeout)
+        }, props.startTimeout)
       })
       if (step.before) {
         try {

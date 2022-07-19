@@ -9,7 +9,6 @@ export type Labels = Record<ButtonID, string>;
 export interface Options {
   labels?: Labels;
   enabledButtons?: EnabledButtons;
-  startTimeout: number;
   enabledNavigationKeys?: {
     ESCAPE: boolean;
     ARROW_RIGHT: boolean;
