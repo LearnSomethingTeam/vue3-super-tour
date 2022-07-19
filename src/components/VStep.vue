@@ -119,10 +119,10 @@ export default defineComponent({
 
     const enableScrolling = () => {
       if (props.enableScrolling) {
-        if (props.step.duration || props.step.offset) {
+        if (props.step.duration !== undefined || props.step.offset !== undefined) {
           let jumpOptions = {
-            duration: props.step.duration || 1000,
-            offset: props.step.offset || 0,
+            duration: props.step.duration ?? 1000,
+            offset: props.step.offset ?? 0,
             callback: undefined,
             a11y: false
           }
