@@ -7,7 +7,6 @@ export type EnabledButtons = Record<ButtonID, boolean>;
 export type Labels = Record<ButtonID, string>;
 
 export interface Options {
-  highlight?: false;
   labels?: Labels;
   enabledButtons?: EnabledButtons;
   startTimeout: number;
@@ -23,7 +22,6 @@ export interface Options {
 
 export interface StepOptions {
   enableScrolling?: boolean;
-  highlight?: boolean;
   enabledButtons?: EnabledButtons;
   modifiers?: Array<Partial<Modifier<any,any>>>;
   placement?: Placement;

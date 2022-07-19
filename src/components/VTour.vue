@@ -12,7 +12,7 @@
       :is-last="isLast"
       :labels="customOptions.labels"
       :enabled-buttons="customOptions.enabledButtons"
-      :highlight="customOptions.highlight"
+      :highlight="highlight"
       :debug="customOptions.debug"
     >
       <!--Default slot {{ currentStep }}-->
@@ -29,7 +29,7 @@
         :is-last="isLast"
         :labels="customOptions.labels"
         :enabled-buttons="customOptions.enabledButtons"
-        :highlight="customOptions.highlight"
+        :highlight="highlight"
         :stop-on-fail="customOptions.stopOnTargetNotFound"
         :debug="customOptions.debug"
         @targetNotFound="$emit('targetNotFound', $event)"
@@ -62,6 +62,10 @@ export default defineComponent({
     options: {
       type: Object as PropType<Partial<Options>>,
       default: () => { return DEFAULT_OPTIONS }
+    },
+    highlight: {
+      type: Boolean,
+      default: false,
     },
     callbacks: {
       type: Object as PropType<Partial<typeof DEFAULT_CALLBACKS>>,
