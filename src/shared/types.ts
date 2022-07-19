@@ -16,7 +16,6 @@ export interface Options {
     ARROW_RIGHT: boolean;
     ARROW_LEFT: boolean;
   };
-  stopOnTargetNotFound?: boolean;
 }
 
 export interface StepOptions {

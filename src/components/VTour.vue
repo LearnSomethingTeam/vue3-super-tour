@@ -30,7 +30,7 @@
         :labels="customOptions.labels"
         :enabled-buttons="customOptions.enabledButtons"
         :highlight="highlight"
-        :stop-on-fail="customOptions.stopOnTargetNotFound"
+        :stop-on-fail="stopOnTargetNotFound"
         :debug="debug"
         @targetNotFound="$emit('targetNotFound', $event)"
       >
@@ -65,6 +65,7 @@ export default defineComponent({
     },
     debug: Boolean,
     highlight: Boolean,
+    stopOnTargetNotFound: Boolean,
     callbacks: {
       type: Object as PropType<Partial<typeof DEFAULT_CALLBACKS>>,
       default: () => { return DEFAULT_CALLBACKS }
