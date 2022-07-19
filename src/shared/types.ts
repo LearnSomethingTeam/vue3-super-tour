@@ -1,4 +1,5 @@
 import type { Modifier, Placement } from '@popperjs/core';
+import type { ComputedRef, Ref } from 'vue';
 
 export type ButtonID = 'buttonSkip' | 'buttonPrevious' | 'buttonNext' | 'buttonStop';
 
@@ -13,6 +14,9 @@ export interface StepOptions {
   placement?: Placement;
 }
 
+/**
+ * The main interface for steps to be provided to the tour
+ */
 export interface Step {
   target: string;
   header?: {
@@ -27,13 +31,16 @@ export interface Step {
   before?: (triggeredBy: 'start' | 'previous' | 'next') => Promise<void>;
 }
 
+/**
+ * A representation of the tour held in $tours
+ */
 export interface Tour {
-  step: Step;
+  step: ComputedRef<Step>;
   start: (startStep: string) => Promise<void>;
-  isRunning: boolean;
-  currentStep: number;
-  isFirst: boolean;
-  isLast: boolean;
+  isRunning: ComputedRef<boolean>;
+  currentStep: Ref<number>;
+  isFirst: ComputedRef<boolean>;
+  isLast: ComputedRef<boolean>;
   previousStep: () => Promise<void>;
   nextStep: () => Promise<void>;
   stop: () => void;

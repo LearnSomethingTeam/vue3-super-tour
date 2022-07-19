@@ -43,7 +43,7 @@
 <script lang="ts">
 import { ref, computed, onMounted, onBeforeUnmount, getCurrentInstance, defineComponent, type PropType } from 'vue'
 
-import type { ButtonID, KeyID, Step } from '../shared/types';
+import type { ButtonID, KeyID, Step, Tour } from '../shared/types';
 import { DEFAULT_CALLBACKS, KEYS } from '../shared/constants'
 
 export default defineComponent({
@@ -208,8 +208,9 @@ export default defineComponent({
     }
 
     onMounted(() => {
+      const tour: Tour = { step, start, isRunning, currentStep, isFirst, isLast, previousStep, nextStep, stop, skip, finish }
       const app = getCurrentInstance()
-      app!.appContext.config.globalProperties.$tours[props.name] = { step, start, isRunning, currentStep, isFirst, isLast, previousStep, nextStep, stop, skip, finish }
+      app!.appContext.config.globalProperties.$tours[props.name] = tour
       if (props.useKeyboardNavigation) {
         window.addEventListener('keyup', handleKeyup)
       }
