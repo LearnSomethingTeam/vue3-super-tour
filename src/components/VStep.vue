@@ -43,7 +43,7 @@ import type { ButtonID, Step } from '../shared/types';
 
 export default defineComponent({
   name: 'v-step',
-  emits: ['stop', 'targetNotFound'],
+  emits: ['stop', 'target-not-found'],
   props: {
     step: {
       type: Object as PropType<Step>,
@@ -122,7 +122,7 @@ export default defineComponent({
         if (props.debug) {
           console.error('[Vue Tour] The target element ' + props.step.target + ' of .v-step[id="' + hash + '"] does not exist!')
         }
-        ctx.emit('targetNotFound', props.step)
+        ctx.emit('target-not-found', props.step)
         if (props.stopOnFail) {
           ctx.emit('stop');
         }

@@ -30,7 +30,7 @@
         :highlight="highlight"
         :stop-on-fail="stopOnTargetNotFound"
         :debug="debug"
-        @targetNotFound="$emit('target-not-found', $event)"
+        @target-not-found="$emit('target-not-found', $event)"
       >
         <!--<div v-if="index === 2" slot="actions">
           <a @click="nextStep">Next step</a>
