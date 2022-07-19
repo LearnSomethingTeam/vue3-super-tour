@@ -17,7 +17,6 @@ export interface Options {
 }
 
 export interface StepOptions {
-  enableScrolling?: boolean;
   enabledButtons?: EnabledButtons;
   modifiers?: Array<Partial<Modifier<any,any>>>;
   placement?: Placement;

@@ -80,6 +80,10 @@ export default defineComponent({
     enabledButtons: {
       type: Object
     },
+    enableScrolling: {
+      type: Boolean,
+      default: true,
+    },
     highlight: {
       type: Boolean
     },
@@ -133,7 +137,7 @@ export default defineComponent({
     }
 
     const enableScrolling = () => {
-      if (params.value.enableScrolling) {
+      if (props.enableScrolling) {
         if (props.step.duration || props.step.offset) {
           let jumpOptions = {
             duration: props.step.duration || 1000,

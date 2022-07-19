@@ -42,7 +42,6 @@ export const HIGHLIGHT = {
 }
 
 export const DEFAULT_STEP_OPTIONS: StepOptions = {
-  enableScrolling: true,
   enabledButtons: DEFAULT_OPTIONS.enabledButtons,
   modifiers: [
     {
