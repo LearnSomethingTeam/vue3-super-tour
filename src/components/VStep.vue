@@ -31,8 +31,8 @@
   <!-- </teleport> -->
 </template>
 
-<script lang="ts">
-import { ref, computed, onMounted, onUnmounted, defineComponent, type PropType, type Ref } from 'vue'
+<script setup lang="ts">
+import { ref, computed, onMounted, onUnmounted, type PropType, type Ref } from 'vue'
 import { createPopper } from '@popperjs/core'
 import jump from 'jump.js'
 import sum from 'hash-sum'
@@ -41,148 +41,142 @@ import { DEFAULT_STEP_OPTIONS, HIGHLIGHT } from '../shared/constants'
 import type { ButtonID, Step } from '../shared/types';
 
 
-export default defineComponent({
-  name: 'v-step',
-  emits: ['stop', 'finish', 'skip', 'previous-step', 'next-step', 'target-not-found'],
-  props: {
-    step: {
-      type: Object as PropType<Step>,
-      required: true,
-    },
-    isFirst: {
-      type: Boolean
-    },
-    isLast: {
-      type: Boolean
-    },
-    buttons: {
-      type: Object as PropType<Record<ButtonID, string | false>>,
-      required: true,
-    },
-    displayMask: {
-      type: Boolean,
-      default: false
-    },
-    enableScrolling: {
-      type: Boolean,
-      default: true,
-    },
-    highlight: {
-      type: Boolean
-    },
-    stopOnFail: {
-      type: Boolean
-    },
-    debug: {
-      type: Boolean
-    }
+const emit = defineEmits(['stop', 'finish', 'skip', 'previous-step', 'next-step', 'target-not-found']);
+const props = defineProps({
+  step: {
+    type: Object as PropType<Step>,
+    required: true,
   },
-  setup(props, ctx) {
-    const hash = sum(props.step.target)
-    const targetElement = document.querySelector(props.step.target) as HTMLElement
-
-    const params = computed(() => {
-      return {
-        ...DEFAULT_STEP_OPTIONS,
-        ...{ highlight: props.highlight }, // Use global tour highlight setting first
-        ...props.step.params // Then use local step parameters if defined
-      }
-    })
-
-
-    const VStep: Ref<HTMLElement | null> = ref(null)
-
-    const createStep = () => {
-      if (props.debug) {
-        console.log('[Vue Tour] The target element ' + props.step.target + ' of .v-step[id="' + hash + '"] is:', targetElement)
-      }
-
-      if (targetElement) {
-        enableScrolling()
-        createHighlight()
-
-        createPopper(
-          targetElement,
-          VStep.value as HTMLElement,
-          params.value
-        )
-      } else {
-        if (props.debug) {
-          console.error('[Vue Tour] The target element ' + props.step.target + ' of .v-step[id="' + hash + '"] does not exist!')
-        }
-        ctx.emit('target-not-found', props.step)
-        if (props.stopOnFail) {
-          ctx.emit('stop');
-        }
-      }
-    }
-
-    const enableScrolling = () => {
-      if (props.enableScrolling) {
-        if (props.step.duration !== undefined || props.step.offset !== undefined) {
-          let jumpOptions = {
-            duration: props.step.duration ?? 1000,
-            offset: props.step.offset ?? 0,
-            callback: undefined,
-            a11y: false
-          }
-
-          jump(targetElement, jumpOptions)
-        } else {
-          // Use the native scroll by default if no scroll options has been defined
-          targetElement?.scrollIntoView({ behavior: 'smooth' })
-        }
-      }
-    }
-
-    const isHighlightEnabled = () => {
-      if (props.debug) {
-        console.log(`[Vue Tour] Highlight is ${params.value.highlight ? 'enabled' : 'disabled'} for .v-step[id="${hash}"]`)
-      }
-      return params.value.highlight
-    }
-
-    const createHighlight = () => {
-      if (isHighlightEnabled() && targetElement) {
-        document.body.classList.add(HIGHLIGHT.CLASSES.ACTIVE)
-        const transitionValue = window.getComputedStyle(targetElement).getPropertyValue('transition')
-
-        // Make sure our background doesn't flick on transitions
-        if (transitionValue !== 'all 0s ease 0s') {
-          targetElement.style.transition = `${transitionValue}, ${HIGHLIGHT.TRANSITION}`
-        }
-
-        targetElement.classList.add(HIGHLIGHT.CLASSES.TARGET_HIGHLIGHTED)
-        // The element must have a position, if it doesn't have one, add a relative position class
-        if (!targetElement.style.position) {
-          targetElement.classList.add(HIGHLIGHT.CLASSES.TARGET_RELATIVE)
-        }
-      } else {
-        document.body.classList.remove(HIGHLIGHT.CLASSES.ACTIVE)
-      }
-    }
-
-    const removeHighlight = () => {
-      if (isHighlightEnabled()) {
-        const currentTransition = targetElement.style.transition
-        targetElement.classList.remove(HIGHLIGHT.CLASSES.TARGET_HIGHLIGHTED)
-        targetElement.classList.remove(HIGHLIGHT.CLASSES.TARGET_RELATIVE)
-        // Remove our transition when step is finished.
-        if (currentTransition.includes(HIGHLIGHT.TRANSITION)) {
-          setTimeout(() => {
-            targetElement.style.transition = currentTransition.replace(`, ${HIGHLIGHT.TRANSITION}`, '')
-          }, 0)
-        }
-      }
-    }
-
-    onMounted(createStep)
-
-    onUnmounted(removeHighlight)
-
-    return { hash, props, VStep }
+  isFirst: {
+    type: Boolean
+  },
+  isLast: {
+    type: Boolean
+  },
+  buttons: {
+    type: Object as PropType<Record<ButtonID, string | false>>,
+    required: true,
+  },
+  displayMask: {
+    type: Boolean,
+    default: false
+  },
+  enableScrolling: {
+    type: Boolean,
+    default: true,
+  },
+  highlight: {
+    type: Boolean
+  },
+  stopOnFail: {
+    type: Boolean
+  },
+  debug: {
+    type: Boolean
   }
-})
+});
+
+  const hash = sum(props.step.target)
+  const targetElement = document.querySelector(props.step.target) as HTMLElement
+
+  const params = computed(() => {
+    return {
+      ...DEFAULT_STEP_OPTIONS,
+      ...{ highlight: props.highlight }, // Use global tour highlight setting first
+      ...props.step.params // Then use local step parameters if defined
+    }
+  })
+
+
+  const VStep: Ref<HTMLElement | null> = ref(null)
+
+  const createStep = () => {
+    if (props.debug) {
+      console.log('[Vue Tour] The target element ' + props.step.target + ' of .v-step[id="' + hash + '"] is:', targetElement)
+    }
+
+    if (targetElement) {
+      enableScrolling()
+      createHighlight()
+
+      createPopper(
+        targetElement,
+        VStep.value as HTMLElement,
+        params.value
+      )
+    } else {
+      if (props.debug) {
+        console.error('[Vue Tour] The target element ' + props.step.target + ' of .v-step[id="' + hash + '"] does not exist!')
+      }
+      emit('target-not-found', props.step)
+      if (props.stopOnFail) {
+        emit('stop');
+      }
+    }
+  }
+
+  const enableScrolling = () => {
+    if (props.enableScrolling) {
+      if (props.step.duration !== undefined || props.step.offset !== undefined) {
+        let jumpOptions = {
+          duration: props.step.duration ?? 1000,
+          offset: props.step.offset ?? 0,
+          callback: undefined,
+          a11y: false
+        }
+
+        jump(targetElement, jumpOptions)
+      } else {
+        // Use the native scroll by default if no scroll options has been defined
+        targetElement?.scrollIntoView({ behavior: 'smooth' })
+      }
+    }
+  }
+
+  const isHighlightEnabled = () => {
+    if (props.debug) {
+      console.log(`[Vue Tour] Highlight is ${params.value.highlight ? 'enabled' : 'disabled'} for .v-step[id="${hash}"]`)
+    }
+    return params.value.highlight
+  }
+
+  const createHighlight = () => {
+    if (isHighlightEnabled() && targetElement) {
+      document.body.classList.add(HIGHLIGHT.CLASSES.ACTIVE)
+      const transitionValue = window.getComputedStyle(targetElement).getPropertyValue('transition')
+
+      // Make sure our background doesn't flick on transitions
+      if (transitionValue !== 'all 0s ease 0s') {
+        targetElement.style.transition = `${transitionValue}, ${HIGHLIGHT.TRANSITION}`
+      }
+
+      targetElement.classList.add(HIGHLIGHT.CLASSES.TARGET_HIGHLIGHTED)
+      // The element must have a position, if it doesn't have one, add a relative position class
+      if (!targetElement.style.position) {
+        targetElement.classList.add(HIGHLIGHT.CLASSES.TARGET_RELATIVE)
+      }
+    } else {
+      document.body.classList.remove(HIGHLIGHT.CLASSES.ACTIVE)
+    }
+  }
+
+  const removeHighlight = () => {
+    if (isHighlightEnabled()) {
+      const currentTransition = targetElement.style.transition
+      targetElement.classList.remove(HIGHLIGHT.CLASSES.TARGET_HIGHLIGHTED)
+      targetElement.classList.remove(HIGHLIGHT.CLASSES.TARGET_RELATIVE)
+      // Remove our transition when step is finished.
+      if (currentTransition.includes(HIGHLIGHT.TRANSITION)) {
+        setTimeout(() => {
+          targetElement.style.transition = currentTransition.replace(`, ${HIGHLIGHT.TRANSITION}`, '')
+        }, 0)
+      }
+    }
+  }
+
+  onMounted(createStep)
+
+  onUnmounted(removeHighlight)
 </script>
 
 <style lang="scss" scoped>
