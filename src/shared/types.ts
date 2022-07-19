@@ -1,4 +1,4 @@
-import type { Modifier, OptionsGeneric, Placement } from '@popperjs/core';
+import type { Modifier, OptionsGeneric } from '@popperjs/core';
 import type { ComputedRef, Ref } from 'vue';
 
 export type ButtonID = 'buttonSkip' | 'buttonPrevious' | 'buttonNext' | 'buttonStop';
