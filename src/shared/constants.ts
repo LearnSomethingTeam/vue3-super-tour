@@ -10,18 +10,6 @@ export const DEFAULT_CALLBACKS = {
 }
 
 export const DEFAULT_OPTIONS: Options = {
-  labels: {
-    buttonSkip: 'Skip tour',
-    buttonPrevious: 'Previous',
-    buttonNext: 'Next',
-    buttonStop: 'Finish'
-  },
-  enabledButtons: {
-    buttonSkip: true,
-    buttonPrevious: true,
-    buttonNext: true,
-    buttonStop: true
-  },
   enabledNavigationKeys: {
     ESCAPE: true,
     ARROW_RIGHT: true,
@@ -42,7 +30,6 @@ export const HIGHLIGHT = {
 }
 
 export const DEFAULT_STEP_OPTIONS: StepOptions = {
-  enabledButtons: DEFAULT_OPTIONS.enabledButtons,
   modifiers: [
     {
       name: 'arrow',

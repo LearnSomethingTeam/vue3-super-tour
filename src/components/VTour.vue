@@ -10,8 +10,7 @@
       :finish="finish"
       :is-first="isFirst"
       :is-last="isLast"
-      :labels="customOptions.labels"
-      :enabled-buttons="customOptions.enabledButtons"
+      :buttons="buttons"
       :highlight="highlight"
       :debug="debug"
     >
@@ -27,8 +26,7 @@
         :finish="finish"
         :is-first="isFirst"
         :is-last="isLast"
-        :labels="customOptions.labels"
-        :enabled-buttons="customOptions.enabledButtons"
+        :buttons="buttons"
         :highlight="highlight"
         :stop-on-fail="stopOnTargetNotFound"
         :debug="debug"
@@ -45,7 +43,7 @@
 <script lang="ts">
 import { ref, computed, onMounted, onBeforeUnmount, getCurrentInstance, defineComponent, type PropType } from 'vue'
 
-import type { Options, Step } from '../shared/types';
+import type { ButtonID, Options, Step } from '../shared/types';
 import { DEFAULT_CALLBACKS, DEFAULT_OPTIONS, KEYS } from '../shared/constants'
 
 export default defineComponent({
@@ -62,6 +60,15 @@ export default defineComponent({
     options: {
       type: Object as PropType<Partial<Options>>,
       default: () => { return DEFAULT_OPTIONS }
+    },
+    buttons: {
+      type: Object as PropType<Record<ButtonID, string | false>>,
+      default: {
+        buttonSkip: 'Skip tour',
+        buttonPrevious: 'Previous',
+        buttonNext: 'Next',
+        buttonStop: 'Finish'
+      },
     },
     debug: Boolean,
     highlight: Boolean,

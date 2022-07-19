@@ -19,10 +19,10 @@
 
       <slot name="actions">
         <div class="v-step__buttons">
-          <button @click.prevent="skip" v-if="!isLast && isButtonEnabled('buttonSkip')" class="v-step__button v-step__button-skip">{{ labels.buttonSkip }}</button>
-          <button @click.prevent="previousStep" v-if="!isFirst && isButtonEnabled('buttonPrevious')" class="v-step__button v-step__button-previous">{{ labels.buttonPrevious }}</button>
-          <button @click.prevent="nextStep" v-if="!isLast && isButtonEnabled('buttonNext')" class="v-step__button v-step__button-next">{{ labels.buttonNext }}</button>
-          <button @click.prevent="finish" v-if="isLast && isButtonEnabled('buttonStop')" class="v-step__button v-step__button-stop">{{ labels.buttonStop }}</button>
+          <button @click.prevent="skip" v-if="!isLast && buttons.buttonSkip" class="v-step__button v-step__button-skip">{{ buttons.buttonSkip }}</button>
+          <button @click.prevent="previousStep" v-if="!isFirst && buttons.buttonPrevious" class="v-step__button v-step__button-previous">{{ buttons.buttonPrevious }}</button>
+          <button @click.prevent="nextStep" v-if="!isLast && buttons.buttonNext" class="v-step__button v-step__button-next">{{ buttons.buttonNext }}</button>
+          <button @click.prevent="finish" v-if="isLast && buttons.buttonStop" class="v-step__button v-step__button-stop">{{ buttons.buttonStop }}</button>
         </div>
       </slot>
 
@@ -38,7 +38,7 @@ import jump from 'jump.js'
 import sum from 'hash-sum'
 
 import { DEFAULT_STEP_OPTIONS, HIGHLIGHT } from '../shared/constants'
-import type { Labels, Step } from '../shared/types';
+import type { ButtonID, Step } from '../shared/types';
 
 
 export default defineComponent({
@@ -69,16 +69,13 @@ export default defineComponent({
     isLast: {
       type: Boolean
     },
-    labels: {
-      type: Object as PropType<Labels>,
-      required: true
+    buttons: {
+      type: Object as PropType<Record<ButtonID, string | false>>,
+      required: true,
     },
     displayMask: {
       type: Boolean,
       default: false
-    },
-    enabledButtons: {
-      type: Object
     },
     enableScrolling: {
       type: Boolean,
@@ -103,7 +100,6 @@ export default defineComponent({
       return {
         ...DEFAULT_STEP_OPTIONS,
         ...{ highlight: props.highlight }, // Use global tour highlight setting first
-        ...{ enabledButtons: Object.assign({}, props.enabledButtons) },
         ...props.step.params // Then use local step parameters if defined
       }
     })
@@ -195,15 +191,11 @@ export default defineComponent({
       }
     }
 
-    const isButtonEnabled = (name: string) => {
-      return params.value.enabledButtons.hasOwnProperty(name) ? params.value.enabledButtons[name] : true
-    }
-
     onMounted(createStep)
 
     onUnmounted(removeHighlight)
 
-    return { hash, isButtonEnabled, props, VStep }
+    return { hash, props, VStep }
   }
 })
 </script>

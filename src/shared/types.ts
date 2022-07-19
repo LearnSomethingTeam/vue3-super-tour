@@ -7,8 +7,6 @@ export type EnabledButtons = Record<ButtonID, boolean>;
 export type Labels = Record<ButtonID, string>;
 
 export interface Options {
-  labels?: Labels;
-  enabledButtons?: EnabledButtons;
   enabledNavigationKeys?: {
     ESCAPE: boolean;
     ARROW_RIGHT: boolean;
@@ -17,7 +15,6 @@ export interface Options {
 }
 
 export interface StepOptions {
-  enabledButtons?: EnabledButtons;
   modifiers?: Array<Partial<Modifier<any,any>>>;
   placement?: Placement;
 }
