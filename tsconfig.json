@@ -1,0 +1,12 @@
+{
+    "compilerOptions": {
+        "esModuleInterop": true,
+        "lib": ["es2015", "dom"],
+        "moduleResolution": "node",
+        "outDir": "dist",
+        "skipLibCheck": true,
+        "typeRoots": ["./types"]
+    },
+    "include": ["src/**/*"],
+    "exclude": ["index.html", "node_modules", "dist"]
+}
