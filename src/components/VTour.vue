@@ -106,7 +106,7 @@ const start = async (startStep: string) => {
   // Wait for the DOM to be loaded, then start the tour
   const startStepIdx = typeof startStep !== 'undefined' ? parseInt(startStep, 10) : 0
   const step = props.steps[startStepIdx]
-  let process = () => new Promise<void>((resolve, reject) => {
+  let process = () => new Promise<void>((resolve) => {
     setTimeout(() => {
       emit('start');
       currentStep.value = startStepIdx
@@ -126,7 +126,7 @@ const start = async (startStep: string) => {
 
 const previousStep = async () => {
   let futureStep = currentStep.value - 1
-  let process = () => new Promise<void>((resolve, reject) => {
+  let process = () => new Promise<void>((resolve) => {
     emit('previous-step', currentStep.value)
     currentStep.value = futureStep
     resolve()
@@ -147,7 +147,7 @@ const previousStep = async () => {
 
 const nextStep = async () => {
   let futureStep = currentStep.value + 1
-  let process = () => new Promise<void>((resolve, reject) => {
+  let process = () => new Promise<void>((resolve) => {
     emit('next-step', currentStep.value)
     currentStep.value = futureStep
     resolve()
