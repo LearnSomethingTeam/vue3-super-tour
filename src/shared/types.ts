@@ -31,7 +31,7 @@ export interface Step {
  */
 export interface Tour {
   step: ComputedRef<Step>;
-  start: (startStep: string) => Promise<void>;
+  start: (startStepIdx?: number) => Promise<void>;
   isRunning: ComputedRef<boolean>;
   currentStep: Ref<number>;
   isFirst: ComputedRef<boolean>;

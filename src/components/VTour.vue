@@ -102,9 +102,8 @@ const numberOfSteps = computed(() => props.steps.length)
 
 const step = computed(() => props.steps[currentStep.value])
 
-const start = async (startStep: string) => {
+const start = async (startStepIdx = 0) => {
   // Wait for the DOM to be loaded, then start the tour
-  const startStepIdx = typeof startStep !== 'undefined' ? parseInt(startStep, 10) : 0
   const step = props.steps[startStepIdx]
   let process = () => new Promise<void>((resolve) => {
     setTimeout(() => {
