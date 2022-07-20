@@ -199,6 +199,7 @@ const handleKeyup = (e: KeyboardEvent) => {
   }
 }
 
+defineExpose({ start, stop, skip, finish, previousStep, nextStep, currentStep, isRunning, isFirst, isLast, numberOfSteps, step })
 
 onMounted(() => {
   const tour: Tour = { step, start, isRunning, currentStep, isFirst, isLast, previousStep, nextStep, stop, skip, finish }
