@@ -40,6 +40,10 @@
   </div>
 </template>
 
+<script lang="ts">
+export default { name: 'v-tour' }
+</script>
+
 <script setup lang="ts">
 import { ref, computed, onMounted, onBeforeUnmount, getCurrentInstance, type PropType } from 'vue'
 

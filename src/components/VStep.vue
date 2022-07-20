@@ -31,6 +31,10 @@
   <!-- </teleport> -->
 </template>
 
+<script lang="ts">
+export default { name: 'v-step' }
+</script>
+
 <script setup lang="ts">
 import { ref, computed, onMounted, onUnmounted, type PropType, type Ref } from 'vue'
 import { createPopper } from '@popperjs/core'
