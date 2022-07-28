@@ -5,7 +5,9 @@
         "moduleResolution": "node",
         "outDir": "dist",
         "skipLibCheck": true,
-        "typeRoots": ["./types"]
+        "typeRoots": ["./types"],
+        "strict": true,
+        "importsNotUsedAsValues": "error"
     },
     "include": ["src/**/*"],
     "exclude": ["index.html", "node_modules", "dist"]
