@@ -1,6 +1,6 @@
 {
-  "name": "vue3-tour",
-  "version": "0.3.1",
+  "name": "@lrnsomething/vue3-super-tour",
+  "version": "0.4.0",
   "scripts": {
     "check": "vue-tsc --noEmit",
     "dev": "vite",
@@ -25,21 +25,42 @@
     "dist",
     "src"
   ],
-  "main": "dist/vue3-tour.umd.js",
-  "browser": "dist/vue3-tour.umd.js",
-  "module": "dist/vue3-tour.es.js",
+  "main": "dist/vue3-super-tour.umd.js",
+  "browser": "dist/vue3-super-tour.umd.js",
+  "module": "dist/vue3-super-tour.es.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/alexandreDavid/vue3-tour.git"
+    "url": "git+https://github.com/LearnSomething/vue3-super-tour.git"
   },
   "keywords": [
     "vue",
-    "tour"
+    "vue3",
+    "tour",
+    "typescript"
   ],
-  "author": "Alexandre David",
+  "author": "Learn Something Team <learnsomething.llc@gmail.com>",
+  "contributors": [
+    {
+      "name": "Pulsar",
+      "email": "pulsar.dev.team@gmail.com",
+      "url": "https://github.com/pulsardev"
+    },
+    {
+      "name": "Alexandre David",
+      "url": "https://github.com/alexandreDavid"
+    },
+    {
+      "name": "Josh Hansen",
+      "url": "https://github.com/joshhansen"
+    }
+  ],
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/alexandreDavid/vue3-tour/issues"
+    "url": "https://github.com/LearnSomethingTeam/vue3-super-tour/issues"
   },
-  "homepage": "https://github.com/alexandreDavid/vue3-tour#readme"
+  "homepage": "https://github.com/LearnSomethingTeam/vue3-super-tour",
+  "description": "The SNES version of vue3-tour",
+  "directories": {
+    "example": "example"
+  }
 }
