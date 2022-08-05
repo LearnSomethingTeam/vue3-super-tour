@@ -15,10 +15,10 @@ The "Super" means it has been ported to Typescript and made more Vue-y: using pr
 
 ## Getting Started
 
-You can install `@lrnsomething/vue3-super-tour` using npm or by downloading the minified build on GitHub.
+You can install `vue3-super-tour` using npm or by downloading the minified build on GitHub.
 
 ```
-npm install @lrnsomething/vue3-super-tour
+npm install vue3-super-tour
 ```
 
 Then import the plugin in your application entry point (typically main.js if you used vue-cli to scaffold your project) and tell Vue to use it. Also don't forget to include the styles. You can add the styles provided by default or customize them to your own liking.
@@ -26,9 +26,9 @@ Then import the plugin in your application entry point (typically main.js if you
 ```javascript
 import { createApp } from 'vue'
 import App from './App.vue'
-import Vue3SuperTour from '@lrnsomething/vue3-super-tour'
+import Vue3SuperTour from 'vue3-super-tour'
 
-import '@lrnsomething/vue3-super-tour/dist/vue3-tour.css'
+import 'vue3-super-tour/dist/vue3-tour.css'
 
 const app = createApp(App)
 
