@@ -29,6 +29,7 @@
   "main": "dist/vue3-super-tour.umd.js",
   "browser": "dist/vue3-super-tour.umd.js",
   "module": "dist/vue3-super-tour.es.js",
+  "types": "dist/lib.d.ts",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/LearnSomething/vue3-super-tour.git"
