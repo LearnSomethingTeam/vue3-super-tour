@@ -1,10 +1,10 @@
 # Vue 3 Super Tour
 
-Forked from [vue3-tour](https://github.com/alexandreDavid/vue3-tour)
+Vue 3 Super Tour is a lightweight, simple and customizable feature tour plugin for use with Vue.js 3. It provides a quick and easy way to guide your users through your application.
 
-> Vue 3 Super Tour is a lightweight, simple and customizable tour plugin for use with Vue.js 3.
-> It provides a quick and easy way to guide your users through your application.
-> The "Super" means it has been ported to Typescript and made more Vue-y: using props and events rather than configuration objects and callbacks. It has also been ported from the Options API to the Composition API, which should minimize performance impact.
+We stand on the shoulders of giants: Vue 3 Super Tour was forked from [vue3-tour](https://github.com/alexandreDavid/vue3-tour), which was in turn forked from [vue-tour](https://github.com/pulsardev/vue-tour). The cycle continues.
+
+The "Super" means it has been ported to Typescript and made more Vue-y: using props and events rather than configuration objects and callbacks. It has also been ported from the Options API to the Composition API, which should minimize performance impact. Mostly this fork was made to ease our own build process at [Learn Something](https://github.com/LearnSomethingTeam).
 
 ![Vue Tour](./screenshot.gif "Vue Tour")
 
@@ -21,8 +21,7 @@ You can install `@lrnsomething/vue3-super-tour` using npm or by downloading the 
 npm install @lrnsomething/vue3-super-tour
 ```
 
-Then import the plugin in your application entry point (typically main.js if you used vue-cli to scaffold your project) and tell Vue to use it.
-Also don't forget to include the styles. You can add the styles provided by default or customize them to your own liking.
+Then import the plugin in your application entry point (typically main.js if you used vue-cli to scaffold your project) and tell Vue to use it. Also don't forget to include the styles. You can add the styles provided by default or customize them to your own liking.
 
 ```javascript
 import { createApp } from 'vue'
@@ -63,7 +62,7 @@ The `target` property of each step can target a DOM element in any component of 
             header: {
               title: 'Get Started',
             },
-            content: `Discover <strong>Vue Tour</strong>!`
+            content: `Discover <strong>Vue 3 Super Tour</strong>!`
           },
           {
             target: '.v-step-1',
