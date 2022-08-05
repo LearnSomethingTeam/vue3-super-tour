@@ -1,11 +1,12 @@
-# Vue Tour
+# Vue 3 Super Tour
 
-Forked from [vue-tour](https://github.com/pulsardev/vue-tour)
+Forked from [vue3-tour](https://github.com/alexandreDavid/vue3-tour)
 
-> Vue Tour is a lightweight, simple and customizable tour plugin for use with Vue.js 3.
+> Vue 3 Super Tour is a lightweight, simple and customizable tour plugin for use with Vue.js 3.
 > It provides a quick and easy way to guide your users through your application.
+> The "Super" means it has been ported to Typescript and made more Vue-y: using props and events rather than configuration objects and callbacks. It has also been ported from the Options API to the Composition API, which should minimize performance impact.
 
-[![Vue Tour](./screenshot.gif "Vue Tour")](https://alexandreDavid.github.io/vue3-tour/)
+![Vue Tour](./screenshot.gif "Vue Tour")
 
 ## Table of Contents
 
@@ -14,10 +15,10 @@ Forked from [vue-tour](https://github.com/pulsardev/vue-tour)
 
 ## Getting Started
 
-You can install `vue3-tour` using npm or by downloading the minified build on GitHub.
+You can install `@lrnsomething/vue3-super-tour` using npm or by downloading the minified build on GitHub.
 
 ```
-npm install vue3-tour
+npm install @lrnsomething/vue3-super-tour
 ```
 
 Then import the plugin in your application entry point (typically main.js if you used vue-cli to scaffold your project) and tell Vue to use it.
@@ -26,13 +27,13 @@ Also don't forget to include the styles. You can add the styles provided by defa
 ```javascript
 import { createApp } from 'vue'
 import App from './App.vue'
-import Vue3Tour from 'vue3-tour'
+import Vue3SuperTour from '@lrnsomething/vue3-super-tour'
 
-import 'vue3-tour/dist/vue3-tour.css'
+import '@lrnsomething/vue3-super-tour/dist/vue3-tour.css'
 
 const app = createApp(App)
 
-app.use(Vue3Tour)
+app.use(Vue3SuperTour)
 
 app.mount('#app')
 ```
@@ -117,4 +118,4 @@ steps: [
 
 ## Something Missing?
 
-If you have a feature request or found a bug, [let us know](https://github.com/alexandreDavid/vue3-tour/issues) by submitting an issue.
+If you have a feature request or found a bug, [let us know](https://github.com/LearnSomethingTeam/vue3-super-tour/issues) by submitting an issue.
