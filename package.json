@@ -63,5 +63,6 @@
   "description": "The SNES version of vue3-tour",
   "directories": {
     "example": "example"
-  }
+  },
+  "packageManager": "yarn@3.2.2"
 }
