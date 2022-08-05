@@ -7,12 +7,12 @@ export default defineConfig({
   build: {
     lib: {
       entry: path.resolve(__dirname, 'src/lib.ts'),
-      name: 'Vue3Tour'
+      name: 'Vue3SuperTour'
     },
     rollupOptions: {
       external: ['vue'],
       output: {
-        assetFileNames: `vue3-tour.[ext]`,
+        assetFileNames: `vue3-super-tour.[ext]`,
         globals: {
           vue: 'Vue'
         }
