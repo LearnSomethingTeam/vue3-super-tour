@@ -41,8 +41,8 @@ import { createPopper } from '@popperjs/core'
 import jump from 'jump.js'
 import sum from 'hash-sum'
 
-import { DEFAULT_STEP_OPTIONS, HIGHLIGHT } from '../shared/constants'
-import type { ButtonID, Step } from '../shared/types';
+import { DEFAULT_STEP_OPTIONS, HIGHLIGHT } from '../constants'
+import type { ButtonID, Step } from '../lib';
 
 
 const emit = defineEmits(['stop', 'finish', 'skip', 'previous-step', 'next-step', 'target-not-found']);

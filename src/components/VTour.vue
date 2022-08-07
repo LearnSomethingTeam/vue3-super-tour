@@ -47,8 +47,8 @@ export default { name: 'v-tour' }
 <script setup lang="ts">
 import { ref, computed, onMounted, onBeforeUnmount, getCurrentInstance, type PropType } from 'vue'
 
-import type { ButtonID, KeyID, Step, Tour } from '../shared/types';
-import { KEYS } from '../shared/constants'
+import type { ButtonID, KeyID, Step, Tour } from '../lib';
+import { KEYS } from '../constants'
 
 const emit = defineEmits(['start', 'stop', 'skip', 'finish', 'previous-step', 'next-step', 'target-not-found']);
 const props = defineProps({

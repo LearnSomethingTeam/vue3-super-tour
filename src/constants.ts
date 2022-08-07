@@ -1,4 +1,4 @@
-import type { StepOptions } from "./types"
+import type { StepOptions } from "./lib"
 
 
 export const HIGHLIGHT = {
