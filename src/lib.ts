@@ -12,3 +12,5 @@ const install = (app: App) => {
 }
 
 export default install
+
+export * from './shared/types';
