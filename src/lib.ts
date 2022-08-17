@@ -31,7 +31,7 @@ export interface Step {
 /**
  * A representation of the tour held in $tours
  */
-export interface Tour {
+export interface TourState {
   step: ComputedRef<Step>;
   start: (startStepIdx?: number) => Promise<void>;
   isRunning: ComputedRef<boolean>;
@@ -49,7 +49,8 @@ import VTour from './components/VTour.vue'
 import VStep from './components/VStep.vue'
 
 export default (app: App) => {
-  app.config.globalProperties.$tours = {}
+  const tours: Record<string,TourState> = {};
+  app.config.globalProperties.$tours = tours;
 
   app.component(VTour.name, VTour)
   app.component(VStep.name, VStep)
