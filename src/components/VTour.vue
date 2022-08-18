@@ -45,50 +45,32 @@ export default { name: 'v-tour' }
 </script>
 
 <script setup lang="ts">
-import { ref, computed, onMounted, onBeforeUnmount, getCurrentInstance, type PropType } from 'vue'
+import { ref, computed, onMounted, onBeforeUnmount, getCurrentInstance } from 'vue'
 
-import type { ButtonID, KeyID, Step, Tour } from '../lib';
+import type { Tour, TourState } from '../lib';
 import { KEYS } from '../constants'
 
 const emit = defineEmits(['start', 'stop', 'skip', 'finish', 'previous-step', 'next-step', 'target-not-found']);
-const props = defineProps({
-  steps: {
-    type: Array as PropType<Step[]>,
-    default: () => []
+const {
+  steps = [],
+  name,
+  buttons = {
+    buttonSkip: 'Skip tour',
+    buttonPrevious: 'Previous',
+    buttonNext: 'Next',
+    buttonStop: 'Finish'
   },
-  name: {
-    type: String,
-    required: true,
+  debug,
+  keys = {
+    ESCAPE: true,
+    ARROW_RIGHT: true,
+    ARROW_LEFT: true
   },
-  buttons: {
-    type: Object as PropType<Record<ButtonID, string | false>>,
-    default: {
-      buttonSkip: 'Skip tour',
-      buttonPrevious: 'Previous',
-      buttonNext: 'Next',
-      buttonStop: 'Finish'
-    },
-  },
-  debug: Boolean,
-  keys: {
-    type: Object as PropType<Record<KeyID, boolean>>,
-    default: {
-      ESCAPE: true,
-      ARROW_RIGHT: true,
-      ARROW_LEFT: true
-    }
-  },
-  highlight: Boolean,
-  startTimeout: {
-    type: Number,
-    default: 0,
-  },
-  stopOnTargetNotFound: Boolean,
-  useKeyboardNavigation: {
-    type: Boolean,
-    default: true,
-  },
-});
+  highlight,
+  startTimeout = 0,
+  stopOnTargetNotFound,
+  useKeyboardNavigation = true,
+} = defineProps<Tour>();
 
 const currentStep = ref(-1)
 
@@ -96,21 +78,21 @@ const isRunning = computed(() => currentStep.value > -1 && currentStep.value < n
 
 const isFirst = computed(() => currentStep.value === 0)
 
-const isLast = computed(() => currentStep.value === props.steps.length - 1)
+const isLast = computed(() => currentStep.value === steps.length - 1)
 
-const numberOfSteps = computed(() => props.steps.length)
+const numberOfSteps = computed(() => steps.length)
 
-const step = computed(() => props.steps[currentStep.value])
+const step = computed(() => steps[currentStep.value])
 
 const start = async (startStepIdx = 0) => {
   // Wait for the DOM to be loaded, then start the tour
-  const step = props.steps[startStepIdx]
+  const step = steps[startStepIdx]
   let process = () => new Promise<void>((resolve) => {
     setTimeout(() => {
       emit('start');
       currentStep.value = startStepIdx
       resolve()
-    }, props.startTimeout)
+    }, startTimeout)
   })
   if (step.before) {
     try {
@@ -131,7 +113,7 @@ const previousStep = async () => {
     resolve()
   })
   if (futureStep > -1) {
-    let step = props.steps[futureStep]
+    let step = steps[futureStep]
     if (step.before) {
       try {
         await step.before('previous')
@@ -152,7 +134,7 @@ const nextStep = async () => {
     resolve()
   })
   if (futureStep < numberOfSteps.value && currentStep.value !== -1) {
-    let step = props.steps[futureStep]
+    let step = steps[futureStep]
     if (step.before) {
       try {
         await step.before('next')
@@ -182,18 +164,18 @@ const finish = () => {
 }
 
 const handleKeyup = (e: KeyboardEvent) => {
-  if (props.debug) {
+  if (debug) {
     console.log('[Vue Tour] A keyup event occured:', e)
   }
   switch (e.keyCode) {
     case KEYS.ARROW_RIGHT:
-      props.keys.ARROW_RIGHT && nextStep()
+      keys.ARROW_RIGHT && nextStep()
       break
     case KEYS.ARROW_LEFT:
-      props.keys.ARROW_LEFT && previousStep()
+      keys.ARROW_LEFT && previousStep()
       break
     case KEYS.ESCAPE:
-      props.keys.ESCAPE && stop()
+      keys.ESCAPE && stop()
       break
   }
 }
@@ -203,14 +185,14 @@ defineExpose({ start, stop, skip, finish, previousStep, nextStep, currentStep, i
 onMounted(() => {
   const tour: TourState = { step, start, isRunning, currentStep, isFirst, isLast, previousStep, nextStep, stop, skip, finish }
   const app = getCurrentInstance()
-  app!.appContext.config.globalProperties.$tours[props.name] = tour
-  if (props.useKeyboardNavigation) {
+  app!.appContext.config.globalProperties.$tours[name] = tour
+  if (useKeyboardNavigation) {
     window.addEventListener('keyup', handleKeyup)
   }
 })
 
 onBeforeUnmount(() => {
-  if (props.useKeyboardNavigation) {
+  if (useKeyboardNavigation) {
     window.removeEventListener('keyup', handleKeyup)
   }
 })

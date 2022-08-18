@@ -28,6 +28,18 @@ export interface Step {
   before?: (triggeredBy: 'start' | 'previous' | 'next') => Promise<void>;
 }
 
+export interface Tour {
+  steps?: Step[];
+  name: string;
+  buttons?: Record<ButtonID, string | false>;
+  debug?: boolean;
+  keys?: Record<KeyID, boolean>;
+  highlight?: boolean;
+  startTimeout?: number;
+  stopOnTargetNotFound?: boolean;
+  useKeyboardNavigation?: boolean;
+}
+
 /**
  * A representation of the tour held in $tours
  */
