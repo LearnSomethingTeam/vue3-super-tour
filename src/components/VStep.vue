@@ -36,7 +36,7 @@ export default { name: 'v-step' }
 </script>
 
 <script setup lang="ts">
-import { ref, computed, onMounted, onUnmounted, type PropType, type Ref } from 'vue'
+import { ref, computed, onMounted, onUnmounted, type Ref } from 'vue'
 import { createPopper } from '@popperjs/core'
 import jump from 'jump.js'
 import sum from 'hash-sum'
