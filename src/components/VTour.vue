@@ -24,18 +24,23 @@
         :params="step.params"
         :duration="step.duration"
         :offset="step.offset"
-        :before="step.before"
-        @previous-step="previousStep"
-        @next-step="nextStep"
-        @stop="stop"
-        @skip="skip"
-        @finish="finish"
+
         :is-first="isFirst"
         :is-last="isLast"
         :buttons="buttons"
         :highlight="highlight"
         :stop-on-fail="stopOnTargetNotFound"
         :debug="debug"
+
+        :prevCallback="step.prevCallback"
+        :nextCallback="step.nextCallback"
+        :skipCallback="step.skipCallback"
+
+        @previous-step="previousStep"
+        @next-step="nextStep"
+        @stop="stop"
+        @skip="skip"
+        @finish="finish"
         @target-not-found="$emit('target-not-found', $event)"
       >
         <!--<div v-if="index === 2" slot="actions">
@@ -78,6 +83,8 @@ const {
   useKeyboardNavigation = true,
   startCallback,
   finishCallback,
+  skipCallback,
+  stopCallback,
 } = defineProps<Tour>();
 
 const currentStep = ref(-1)
@@ -92,80 +99,52 @@ const numberOfSteps = computed(() => steps.length)
 
 const step = computed(() => steps[currentStep.value])
 
-const start = async (startStepIdx = 0) => {
-  // Wait for the DOM to be loaded, then start the tour
-  const step = steps[startStepIdx]
-  let process = () => new Promise<void>((resolve) => {
-    setTimeout(() => {
-      emit('start');
-      currentStep.value = startStepIdx
-      resolve()
-    }, startTimeout)
-  })
-  console.log('startCallback', startCallback);
-  try {
-    await startCallback?.();
-  } catch (e) {
-    return Promise.reject(e)
-  }
-  await process()
-  return Promise.resolve()
+function timeout(ms: number) {
+    return new Promise(resolve => setTimeout(resolve, ms));
 }
 
-const previousStep = async () => {
+async function start(startStepIdx = 0) {
+  await timeout(startTimeout);
+
+  await startCallback?.();
+
+  emit('start');
+  currentStep.value = startStepIdx
+}
+
+async function previousStep() {
   let futureStep = currentStep.value - 1
-  let process = () => new Promise<void>((resolve) => {
+  if (futureStep > -1) {
+    await step.value.prevCallback?.();
     emit('previous-step', currentStep.value)
     currentStep.value = futureStep
-    resolve()
-  })
-  if (futureStep > -1) {
-    let step = steps[futureStep]
-    if (step.before) {
-      try {
-        await step.before('previous')
-      } catch (e) {
-        return Promise.reject(e)
-      }
-    }
-    await process()
   }
-  return Promise.resolve()
 }
 
-const nextStep = async () => {
+async function nextStep() {
   let futureStep = currentStep.value + 1
-  let process = () => new Promise<void>((resolve) => {
+  if (futureStep < numberOfSteps.value && currentStep.value !== -1) {
+    await step.value.nextCallback?.();
     emit('next-step', currentStep.value)
     currentStep.value = futureStep
-    resolve()
-  })
-  if (futureStep < numberOfSteps.value && currentStep.value !== -1) {
-    let step = steps[futureStep]
-    if (step.before) {
-      try {
-        await step.before('next')
-      } catch (e) {
-        return Promise.reject(e)
-      }
-    }
-    await process()
   }
-  return Promise.resolve()
 }
 
-const stop = () => {
+async function stop() {
+  await stopCallback?.();
   emit('stop');
   document.body.classList.remove('v-tour--active')
   currentStep.value = -1
 }
 
-const skip = () => {
+async function skip() {
+  await step.value.skipCallback?.();
+  await skipCallback?.();
   emit('skip');
   stop()
 }
 
-const finish = async () => {
+async function finish() {
   await finishCallback?.();
   emit('finish');
   stop()

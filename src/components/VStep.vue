@@ -54,7 +54,6 @@ const {
   params: propParams,
   duration,
   offset,
-  before,
   isFirst,
   isLast,
   buttons,
@@ -63,6 +62,11 @@ const {
   highlight,
   stopOnFail,
   debug,
+
+  // These actually get handled by VTour
+  // prevCallback,
+  // nextCallback,
+  // skipCallback,
 } = defineProps<Step>();
 
 const hash = sum(target)

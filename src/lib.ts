@@ -25,7 +25,6 @@ export interface Step {
   params?: StepOptions;
   duration?: number;
   offset?: number;
-  before?: (triggeredBy: 'start' | 'previous' | 'next') => Promise<void>;
   isFirst?: boolean;
   isLast?: boolean;
   buttons?: Record<ButtonID, string | false>;
@@ -34,6 +33,15 @@ export interface Step {
   highlight?: boolean;
   stopOnFail?: boolean;
   debug?: boolean;
+
+  /** Called if previous is chosen on this step */
+  prevCallback?: () => void | Promise<void>;
+
+  /** Called if next is chosen on this step */
+  nextCallback?: () => void | Promise<void>;
+
+  /** Called if skip is chosen on this step */
+  skipCallback?: () => void | Promise<void>;
 }
 
 export interface Tour {
@@ -47,8 +55,17 @@ export interface Tour {
   stopOnTargetNotFound?: boolean;
   useKeyboardNavigation?: boolean;
 
+  /** Called when the tour starts */
   startCallback?: () => void | Promise<void>;
+
+  /** Called when the tour is finished */
   finishCallback?: () => void | Promise<void>;
+
+  /** Called when the tour is skipped */
+  skipCallback?: () => void | Promise<void>;
+
+  /** Called any time the tour stops, whether finished or skipped */
+  stopCallback?: () => void | Promise<void>;
 }
 
 /**
