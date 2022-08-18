@@ -47,7 +47,8 @@ export interface Tour {
   stopOnTargetNotFound?: boolean;
   useKeyboardNavigation?: boolean;
 
-  onStart?: () => void | Promise<void>;
+  startCallback?: () => void | Promise<void>;
+  finishCallback?: () => void | Promise<void>;
 }
 
 /**

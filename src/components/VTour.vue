@@ -76,7 +76,8 @@ const {
   startTimeout = 0,
   stopOnTargetNotFound,
   useKeyboardNavigation = true,
-  onStart,
+  startCallback,
+  finishCallback,
 } = defineProps<Tour>();
 
 const currentStep = ref(-1)
@@ -101,8 +102,9 @@ const start = async (startStepIdx = 0) => {
       resolve()
     }, startTimeout)
   })
+  console.log('startCallback', startCallback);
   try {
-    await onStart?.();
+    await startCallback?.();
   } catch (e) {
     return Promise.reject(e)
   }
@@ -163,7 +165,8 @@ const skip = () => {
   stop()
 }
 
-const finish = () => {
+const finish = async () => {
+  await finishCallback?.();
   emit('finish');
   stop()
 }
