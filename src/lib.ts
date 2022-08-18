@@ -28,7 +28,7 @@ export interface Step {
   before?: (triggeredBy: 'start' | 'previous' | 'next') => Promise<void>;
   isFirst?: boolean;
   isLast?: boolean;
-  buttons: Record<ButtonID, string | false>;
+  buttons?: Record<ButtonID, string | false>;
   displayMask?: boolean;
   enableScrolling?: boolean;
   highlight?: boolean;

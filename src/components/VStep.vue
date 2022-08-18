@@ -19,10 +19,10 @@
 
       <slot name="actions">
         <div class="v-step__buttons">
-          <button @click.prevent="$emit('skip')" v-if="!isLast && buttons.buttonSkip" class="v-step__button v-step__button-skip">{{ buttons.buttonSkip }}</button>
-          <button @click.prevent="$emit('previous-step')" v-if="!isFirst && buttons.buttonPrevious" class="v-step__button v-step__button-previous">{{ buttons.buttonPrevious }}</button>
-          <button @click.prevent="$emit('next-step')" v-if="!isLast && buttons.buttonNext" class="v-step__button v-step__button-next">{{ buttons.buttonNext }}</button>
-          <button @click.prevent="$emit('finish')" v-if="isLast && buttons.buttonStop" class="v-step__button v-step__button-stop">{{ buttons.buttonStop }}</button>
+          <button @click.prevent="$emit('skip')" v-if="!isLast && buttons?.buttonSkip" class="v-step__button v-step__button-skip">{{ buttons.buttonSkip }}</button>
+          <button @click.prevent="$emit('previous-step')" v-if="!isFirst && buttons?.buttonPrevious" class="v-step__button v-step__button-previous">{{ buttons.buttonPrevious }}</button>
+          <button @click.prevent="$emit('next-step')" v-if="!isLast && buttons?.buttonNext" class="v-step__button v-step__button-next">{{ buttons.buttonNext }}</button>
+          <button @click.prevent="$emit('finish')" v-if="isLast && buttons?.buttonStop" class="v-step__button v-step__button-stop">{{ buttons.buttonStop }}</button>
         </div>
       </slot>
 
