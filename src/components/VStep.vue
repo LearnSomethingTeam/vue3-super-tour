@@ -70,7 +70,7 @@ const {
 } = defineProps<Step>();
 
 const hash = sum(target)
-const targetElement = document.querySelector(target) as HTMLElement
+const targetElement = document.querySelector(target) as HTMLElement | null
 
 const params = computed(() => {
   return {
@@ -109,7 +109,7 @@ const createStep = () => {
 }
 
 const enableScrolling = () => {
-  if (propEnableScrolling) {
+  if (propEnableScrolling && targetElement) {
     if (duration !== undefined || offset !== undefined) {
       let jumpOptions = {
         duration: duration ?? 1000,
@@ -154,7 +154,7 @@ const createHighlight = () => {
 }
 
 const removeHighlight = () => {
-  if (isHighlightEnabled()) {
+  if (isHighlightEnabled() && targetElement) {
     const currentTransition = targetElement.style.transition
     targetElement.classList.remove(HIGHLIGHT.CLASSES.TARGET_HIGHLIGHTED)
     targetElement.classList.remove(HIGHLIGHT.CLASSES.TARGET_RELATIVE)
