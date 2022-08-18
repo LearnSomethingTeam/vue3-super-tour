@@ -79,13 +79,23 @@ export default {
             prevCallback() {
               console.log('prev from fourth step');
             },
+            targetNotFoundCallback(target: string) {
+              console.warn('step targetNotFoundCallback', target);
+            }
           }
         ],
         highlight: true,
-        startCallback: this.startCallback,
-        finishCallback: this.finishCallback,
-        stopCallback() {
-          console.log('tour stopped one way or another');
+        startCallback(stepIdx: number) {
+          console.log('startCallback', stepIdx);
+        },
+        finishCallback(stepIdx: number) {
+          console.log('finishCallback', stepIdx);
+        },
+        stopCallback(stepIdx: number) {
+          console.log('stopCallback', stepIdx);
+        },
+        targetNotFoundCallback(stepIdx: number, target: string) {
+          console.warn('targetNotFoundCallback', stepIdx, target);
         }
       },
     }
@@ -94,32 +104,26 @@ export default {
     this.$tours['myTour'].start()
   },
   methods: {
-    startCallback() {
-      console.log('startCallback');
+    startEvent(stepIdx: number) {
+      console.log('start event', stepIdx);
     },
-    finishCallback() {
-      console.log('finishCallback');
+    finishEvent(stepIdx: number) {
+      console.log('finish event', stepIdx);
     },
-    startEvent() {
-      console.log('start event');
+    stopEvent(stepIdx: number) {
+      console.log('stop event', stepIdx);
     },
-    finishEvent() {
-      console.log('finish event');
+    prevEvent(stepIdx: number) {
+      console.log('prev event', stepIdx);
     },
-    stopEvent() {
-      console.log('stop event');
+    nextEvent(stepIdx: number) {
+      console.log('next event', stepIdx);
     },
-    prevEvent() {
-      console.log('prev event');
+    skipEvent(stepIdx: number) {
+      console.log('skip event', stepIdx);
     },
-    nextEvent() {
-      console.log('next event');
-    },
-    skipEvent() {
-      console.log('skip event');
-    },
-    targetNotFoundEvent() {
-      console.log('target-not-found event');
+    targetNotFoundEvent(stepIdx: number, target: string) {
+      console.warn('target-not-found event', stepIdx, target);
     }
   },
 }

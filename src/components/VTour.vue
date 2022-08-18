@@ -36,12 +36,12 @@
         :nextCallback="step.nextCallback"
         :skipCallback="step.skipCallback"
 
-        @previous-step="previousStep"
-        @next-step="nextStep"
+        @prev="previousStep"
+        @next="nextStep"
         @stop="stop"
         @skip="skip"
         @finish="finish"
-        @target-not-found="$emit('target-not-found', $event)"
+        @target-not-found="targetNotFound"
       >
         <!--<div v-if="index === 2" slot="actions">
           <a @click="nextStep">Next step</a>
@@ -61,7 +61,16 @@ import { ref, computed, onMounted, onBeforeUnmount, getCurrentInstance } from 'v
 import type { Tour, TourState } from '../lib';
 import { KEYS } from '../constants'
 
-const emit = defineEmits(['start', 'stop', 'skip', 'finish', 'prev', 'next', 'target-not-found']);
+const emit = defineEmits<{
+  (e: 'start', stepIdx: number): void;
+  (e: 'stop', stepIdx: number): void;
+  (e: 'skip', stepIdx: number): void;
+  (e: 'finish', stepIdx: number): void;
+  (e: 'prev', stepIdx: number): void;
+  (e: 'next', stepIdx: number): void;
+  (e: 'target-not-found', stepIdx: number, target: string): void;
+}>();
+
 const {
   steps = [],
   name,
@@ -85,6 +94,7 @@ const {
   finishCallback,
   skipCallback,
   stopCallback,
+  targetNotFoundCallback,
 } = defineProps<Tour>();
 
 const currentStep = ref(-1)
@@ -99,16 +109,16 @@ const numberOfSteps = computed(() => steps.length)
 
 const step = computed(() => steps[currentStep.value])
 
-function timeout(ms: number) {
+async function timeout(ms: number) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
 
 async function start(startStepIdx = 0) {
   await timeout(startTimeout);
 
-  await startCallback?.();
+  await startCallback?.(startStepIdx);
 
-  emit('start');
+  emit('start', startStepIdx);
   currentStep.value = startStepIdx
 }
 
@@ -131,23 +141,29 @@ async function nextStep() {
 }
 
 async function stop() {
-  await stopCallback?.();
-  emit('stop');
+  await stopCallback?.(currentStep.value);
+  emit('stop', currentStep.value);
   document.body.classList.remove('v-tour--active')
   currentStep.value = -1
 }
 
 async function skip() {
   await step.value.skipCallback?.();
-  await skipCallback?.();
-  emit('skip');
+  await skipCallback?.(currentStep.value);
+  emit('skip', currentStep.value);
   stop()
 }
 
 async function finish() {
-  await finishCallback?.();
-  emit('finish');
+  await finishCallback?.(currentStep.value);
+  emit('finish', currentStep.value);
   stop()
+}
+
+async function targetNotFound(target: string) {
+  await step.value.targetNotFoundCallback?.(target);
+  await targetNotFoundCallback?.(currentStep.value, target);
+  emit('target-not-found', currentStep.value, target);
 }
 
 function handleKeyup(e: KeyboardEvent) {

@@ -20,8 +20,8 @@
       <slot name="actions">
         <div class="v-step__buttons">
           <button @click.prevent="$emit('skip')" v-if="!isLast && buttons?.buttonSkip" class="v-step__button v-step__button-skip">{{ buttons.buttonSkip }}</button>
-          <button @click.prevent="$emit('previous-step')" v-if="!isFirst && buttons?.buttonPrevious" class="v-step__button v-step__button-previous">{{ buttons.buttonPrevious }}</button>
-          <button @click.prevent="$emit('next-step')" v-if="!isLast && buttons?.buttonNext" class="v-step__button v-step__button-next">{{ buttons.buttonNext }}</button>
+          <button @click.prevent="$emit('prev')" v-if="!isFirst && buttons?.buttonPrevious" class="v-step__button v-step__button-previous">{{ buttons.buttonPrevious }}</button>
+          <button @click.prevent="$emit('next')" v-if="!isLast && buttons?.buttonNext" class="v-step__button v-step__button-next">{{ buttons.buttonNext }}</button>
           <button @click.prevent="$emit('finish')" v-if="isLast && buttons?.buttonStop" class="v-step__button v-step__button-stop">{{ buttons.buttonStop }}</button>
         </div>
       </slot>
@@ -45,7 +45,14 @@ import { DEFAULT_STEP_OPTIONS, HIGHLIGHT } from '../constants'
 import type { Step } from '../lib';
 
 
-const emit = defineEmits(['stop', 'finish', 'skip', 'previous-step', 'next-step', 'target-not-found']);
+const emit = defineEmits<{
+  (e: 'stop'): void;
+  (e: 'skip'): void;
+  (e: 'finish'): void;
+  (e: 'prev'): void;
+  (e: 'next'): void;
+  (e: 'target-not-found', target: string): void;
+}>();
 
 const {
   target,
@@ -67,6 +74,7 @@ const {
   // prevCallback,
   // nextCallback,
   // skipCallback,
+  // targetNotFoundCallback
 } = defineProps<Step>();
 
 const hash = sum(target)
