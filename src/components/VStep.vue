@@ -97,23 +97,7 @@ const createStep = () => {
     if (debug) {
       console.error('[Vue Tour] The target element ' + target + ' of .v-step[id="' + hash + '"] does not exist!')
     }
-    emit('target-not-found', {
-      target,
-      header,
-      content,
-      params: propParams,
-      duration,
-      offset,
-      before,
-      isFirst,
-      isLast,
-      buttons,
-      displayMask,
-      enableScrolling: propEnableScrolling,
-      highlight,
-      stopOnFail,
-      debug,
-    })
+    emit('target-not-found', target);
     if (stopOnFail) {
       emit('stop');
     }
