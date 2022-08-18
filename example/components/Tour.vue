@@ -4,15 +4,27 @@
     <div class="v-step-1">A DOM element on your page. The second step will pop on this element because its ID is 'v-step-1'.</div>
     <div data-v-step="2">A DOM element on your page. The third and final step will pop on this element because its ID is 'v-step-2'.</div>
 
-    <v-tour name="myTour" :steps="steps" :highlight="highlight"></v-tour>
+    <v-tour
+      v-bind="tour"
+      @start="startEvent"
+      @finish="finishEvent"
+    />
   </div>
 </template>
 
-<script>
-  export default {
-    name: 'my-tour',
-    data () {
-      return {
+<script lang="ts">
+import type { Tour } from "../../src/lib";
+
+interface Data {
+  tour: Tour;
+}
+
+export default {
+  name: 'my-tour',
+  data(): Data {
+    return {
+      tour: {
+        name: 'myTour',
         steps: [
           {
             target: '#v-step-0',  // We're using document.querySelector() under the hood
@@ -33,11 +45,28 @@
             }
           }
         ],
-        highlight: true
-      }
-    },
-    mounted: function () {
-      this.$tours['myTour'].start()
+        highlight: true,
+        startCallback: this.startCallback,
+        finishCallback: this.finishCallback,
+      },
     }
-  }
+  },
+  mounted: function () {
+    this.$tours['myTour'].start()
+  },
+  methods: {
+    startCallback() {
+      console.log('startCallback');
+    },
+    finishCallback() {
+      console.log('finishCallback');
+    },
+    startEvent() {
+      console.log('start event');
+    },
+    finishEvent() {
+      console.log('finish event');
+    }
+  },
+}
 </script>
