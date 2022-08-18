@@ -42,7 +42,7 @@ import jump from 'jump.js'
 import sum from 'hash-sum'
 
 import { DEFAULT_STEP_OPTIONS, HIGHLIGHT } from '../constants'
-import type { ButtonID, Step } from '../lib';
+import type { Step } from '../lib';
 
 
 const emit = defineEmits(['stop', 'finish', 'skip', 'previous-step', 'next-step', 'target-not-found']);
