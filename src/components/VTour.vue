@@ -61,7 +61,7 @@ import { ref, computed, onMounted, onBeforeUnmount, getCurrentInstance } from 'v
 import type { Tour, TourState } from '../lib';
 import { KEYS } from '../constants'
 
-const emit = defineEmits(['start', 'stop', 'skip', 'finish', 'previous-step', 'next-step', 'target-not-found']);
+const emit = defineEmits(['start', 'stop', 'skip', 'finish', 'prev', 'next', 'target-not-found']);
 const {
   steps = [],
   name,
@@ -116,7 +116,7 @@ async function previousStep() {
   let futureStep = currentStep.value - 1
   if (futureStep > -1) {
     await step.value.prevCallback?.();
-    emit('previous-step', currentStep.value)
+    emit('prev', currentStep.value)
     currentStep.value = futureStep
   }
 }
@@ -125,7 +125,7 @@ async function nextStep() {
   let futureStep = currentStep.value + 1
   if (futureStep < numberOfSteps.value && currentStep.value !== -1) {
     await step.value.nextCallback?.();
-    emit('next-step', currentStep.value)
+    emit('next', currentStep.value)
     currentStep.value = futureStep
   }
 }
