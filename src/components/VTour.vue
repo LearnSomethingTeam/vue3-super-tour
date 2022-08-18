@@ -92,6 +92,8 @@ const {
   useKeyboardNavigation = true,
   startCallback,
   finishCallback,
+  prevCallback,
+  nextCallback,
   skipCallback,
   stopCallback,
   targetNotFoundCallback,
@@ -126,6 +128,7 @@ async function previousStep() {
   let futureStep = currentStep.value - 1
   if (futureStep > -1) {
     await step.value.prevCallback?.();
+    await prevCallback?.(currentStep.value);
     emit('prev', currentStep.value)
     currentStep.value = futureStep
   }
@@ -135,6 +138,7 @@ async function nextStep() {
   let futureStep = currentStep.value + 1
   if (futureStep < numberOfSteps.value && currentStep.value !== -1) {
     await step.value.nextCallback?.();
+    await nextCallback?.(currentStep.value);
     emit('next', currentStep.value)
     currentStep.value = futureStep
   }

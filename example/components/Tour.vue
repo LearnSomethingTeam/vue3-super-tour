@@ -91,6 +91,12 @@ export default {
         finishCallback(stepIdx: number) {
           console.log('finishCallback', stepIdx);
         },
+        prevCallback(stepIdx: number) {
+          console.log('prevCallback', stepIdx);
+        },
+        nextCallback(stepIdx: number) {
+          console.log('nextCallback', stepIdx);
+        },
         stopCallback(stepIdx: number) {
           console.log('stopCallback', stepIdx);
         },
