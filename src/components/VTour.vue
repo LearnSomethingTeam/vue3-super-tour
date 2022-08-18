@@ -150,7 +150,7 @@ async function finish() {
   stop()
 }
 
-const handleKeyup = (e: KeyboardEvent) => {
+function handleKeyup(e: KeyboardEvent) {
   if (debug) {
     console.log('[Vue Tour] A keyup event occured:', e)
   }
