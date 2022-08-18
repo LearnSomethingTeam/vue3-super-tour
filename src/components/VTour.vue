@@ -76,6 +76,7 @@ const {
   startTimeout = 0,
   stopOnTargetNotFound,
   useKeyboardNavigation = true,
+  onStart,
 } = defineProps<Tour>();
 
 const currentStep = ref(-1)
@@ -100,12 +101,10 @@ const start = async (startStepIdx = 0) => {
       resolve()
     }, startTimeout)
   })
-  if (step.before) {
-    try {
-      await step.before('start')
-    } catch (e) {
-      return Promise.reject(e)
-    }
+  try {
+    await onStart?.();
+  } catch (e) {
+    return Promise.reject(e)
   }
   await process()
   return Promise.resolve()
