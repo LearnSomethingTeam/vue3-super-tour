@@ -4,7 +4,7 @@
     <div class="v-step-1">A DOM element on your page. The second step will pop on this element because its ID is 'v-step-1'.</div>
     <div data-v-step="2">A DOM element on your page. The third and final step will pop on this element because its ID is 'v-step-2'.</div>
 
-    <v-tour name="myTour" :steps="steps" :options="options"></v-tour>
+    <v-tour name="myTour" :steps="steps" :highlight="highlight"></v-tour>
   </div>
 </template>
 
@@ -33,9 +33,7 @@
             }
           }
         ],
-        options: {
-            highlight: true
-        }
+        highlight: true
       }
     },
     mounted: function () {
