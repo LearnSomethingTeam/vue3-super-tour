@@ -32,10 +32,6 @@
         :stop-on-fail="stopOnTargetNotFound"
         :debug="debug"
 
-        :prevCallback="step.prevCallback"
-        :nextCallback="step.nextCallback"
-        :skipCallback="step.skipCallback"
-
         @prev="previousStep"
         @next="nextStep"
         @stop="stop"
