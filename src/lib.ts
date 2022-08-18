@@ -26,6 +26,14 @@ export interface Step {
   duration?: number;
   offset?: number;
   before?: (triggeredBy: 'start' | 'previous' | 'next') => Promise<void>;
+  isFirst?: boolean;
+  isLast?: boolean;
+  buttons: Record<ButtonID, string | false>;
+  displayMask?: boolean;
+  enableScrolling?: boolean;
+  highlight?: boolean;
+  stopOnFail?: boolean;
+  debug?: boolean;
 }
 
 export interface Tour {

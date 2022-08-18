@@ -17,8 +17,14 @@
       <!--Default slot {{ currentStep }}-->
       <v-step
         v-if="steps[currentStep]"
-        :step="steps[currentStep]"
         :key="currentStep"
+        :target="step.target"
+        :header="step.header"
+        :content="step.content"
+        :params="step.params"
+        :duration="step.duration"
+        :offset="step.offset"
+        :before="step.before"
         @previous-step="previousStep"
         @next-step="nextStep"
         @stop="stop"
