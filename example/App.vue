@@ -1,6 +1,6 @@
 <template>
   <img alt="Vue logo" src="./assets/logo.png" />
-  <HelloWorld msg="Hello Vue 3 tour example" />
+  <HelloWorld msg="Hello Vue 3 Super Tour example" />
   <Tour />
 </template>
 

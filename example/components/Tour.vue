@@ -19,7 +19,7 @@
             header: {
               title: 'Get Started',
             },
-            content: `Discover <strong>Vue Tour</strong>!`,
+            content: `Discover <strong>Vue 3 Super Tour</strong>!`,
           },
           {
             target: '.v-step-1',
