@@ -7,7 +7,12 @@
     <v-tour
       v-bind="tour"
       @start="startEvent"
+      @stop="stopEvent"
+      @skip="skipEvent"
       @finish="finishEvent"
+      @prev="prevEvent"
+      @next="nextEvent"
+      @target-not-found="targetNotFoundEvent"
     />
   </div>
 </template>
@@ -32,22 +37,56 @@ export default {
               title: 'Get Started',
             },
             content: `Discover <strong>Vue 3 Super Tour</strong>!`,
+            nextCallback() {
+              console.log('next from first step');
+            },
+            skipCallback() {
+              console.log('skip from first step');
+            }
           },
           {
             target: '.v-step-1',
-            content: 'An awesome plugin made with Vue.js!'
+            content: 'An awesome plugin made with Vue.js!',
+            prevCallback() {
+              console.log('prev from second step');
+            },
+            nextCallback() {
+              console.log('next from second step');
+            },
+            skipCallback() {
+              console.log('skip from second step');
+            }
           },
           {
             target: '[data-v-step="2"]',
             content: 'Try it, you\'ll love it!<br>You can put HTML in the steps and completely customize the DOM to suit your needs.',
             params: {
               placement: 'top' // Any valid Popper.js placement. See https://popper.js.org/popper-documentation.html#Popper.placements
+            },
+            prevCallback() {
+              console.log('prev from third step');
+            },
+            nextCallback() {
+              console.log('next from third step');
+            },
+            skipCallback() {
+              console.log('skip from third step');
             }
+          },
+          {
+            target: '#fdjfksdfjsdkfjasdk',
+            content: 'Non-existing target',
+            prevCallback() {
+              console.log('prev from fourth step');
+            },
           }
         ],
         highlight: true,
         startCallback: this.startCallback,
         finishCallback: this.finishCallback,
+        stopCallback() {
+          console.log('tour stopped one way or another');
+        }
       },
     }
   },
@@ -66,6 +105,21 @@ export default {
     },
     finishEvent() {
       console.log('finish event');
+    },
+    stopEvent() {
+      console.log('stop event');
+    },
+    prevEvent() {
+      console.log('prev event');
+    },
+    nextEvent() {
+      console.log('next event');
+    },
+    skipEvent() {
+      console.log('skip event');
+    },
+    targetNotFoundEvent() {
+      console.log('target-not-found event');
     }
   },
 }
