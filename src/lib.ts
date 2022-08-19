@@ -62,19 +62,19 @@ export interface Tour {
   /** Called when the tour is finished */
   finishCallback?: (stepIdx: number) => void | Promise<void>;
 
-  /** Called if previous is chosen on this step */
+  /** Called if previous is chosen on the current step */
   prevCallback?: (stepIdx: number) => void | Promise<void>;
 
-  /** Called if next is chosen on this step */
+  /** Called if next is chosen on the current step */
   nextCallback?: (stepIdx: number) => void | Promise<void>;
 
   /** Called when the tour is skipped */
   skipCallback?: (stepIdx: number) => void | Promise<void>;
 
-  /** Called any time the tour stops, whether finished or skipped */
+  /** Called any time the tour stops, whether finished or skipped or due to an error */
   stopCallback?: (stepIdx: number) => void | Promise<void>;
 
-  /** Called any time a step's target isn't found */
+  /** Called if the current step's target isn't found */
   targetNotFoundCallback?: (stepIdx: number, target: string) => void | Promise<void>;
 }
 
