@@ -14,7 +14,6 @@
       :highlight="highlight"
       :debug="debug"
     >
-      <!--Default slot {{ currentStep }}-->
       <v-step
         v-if="steps[currentStep]"
         :key="currentStep"
@@ -38,11 +37,7 @@
         @skip="skip"
         @finish="finish"
         @target-not-found="targetNotFound"
-      >
-        <!--<div v-if="index === 2" slot="actions">
-          <a @click="nextStep">Next step</a>
-        </div>-->
-      </v-step>
+      ></v-step>
     </slot>
   </div>
 </template>
