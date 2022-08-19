@@ -1,3 +1,6 @@
+## 0.5.1
+* Add missing build artifacts.
+
 ## 0.5.0
 This release unifies the exported API for smoother interaction between template and JS/TS code.
 * `Tour` has been renamed `TourState`, representing the live tour element in `$tours`.
