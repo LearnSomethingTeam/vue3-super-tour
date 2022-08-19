@@ -59,9 +59,7 @@ The `target` property of each step can target a DOM element in any component of 
         steps: [
           {
             target: '#v-step-0',  // We're using document.querySelector() under the hood
-            header: {
-              title: 'Get Started',
-            },
+            title: 'Get Started',
             content: `Discover <strong>Vue 3 Super Tour</strong>!`
           },
           {

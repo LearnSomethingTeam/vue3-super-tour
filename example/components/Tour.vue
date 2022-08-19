@@ -33,9 +33,7 @@ export default {
         steps: [
           {
             target: '#v-step-0',  // We're using document.querySelector() under the hood
-            header: {
-              title: 'Get Started',
-            },
+            title: 'Get Started',
             content: `Discover <strong>Vue 3 Super Tour</strong>!`,
             nextCallback() {
               console.log('next from first step');

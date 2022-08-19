@@ -5,8 +5,8 @@
     </div> -->
     <div class="v-step" :id="'v-step-' + hash" ref="VStep">
       <slot name="header">
-        <div v-if="header" class="v-step__header">
-          <div v-if="header.title" v-html="header.title"></div>
+        <div v-if="title" class="v-step__header">
+          <div v-html="title"></div>
         </div>
       </slot>
 
@@ -26,7 +26,7 @@
         </div>
       </slot>
 
-      <div class="v-step__arrow" :class="{ 'v-step__arrow--dark': header && header.title }"></div>
+      <div class="v-step__arrow" :class="{ 'v-step__arrow--dark': !!title }"></div>
     </div>
   <!-- </teleport> -->
 </template>
@@ -56,7 +56,7 @@ const emit = defineEmits<{
 
 const {
   target,
-  header,
+  title,
   content,
   params: propParams,
   duration,

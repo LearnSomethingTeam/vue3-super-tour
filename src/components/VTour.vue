@@ -18,7 +18,7 @@
         v-if="steps[currentStep]"
         :key="currentStep"
         :target="step.target"
-        :header="step.header"
+        :title="step.title"
         :content="step.content"
         :params="step.params"
         :duration="step.duration"

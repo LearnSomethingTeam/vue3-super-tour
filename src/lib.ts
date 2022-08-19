@@ -18,9 +18,7 @@ export type StepOptions = Partial<OptionsGeneric<Partial<Modifier<any, any>>>>;
  */
 export interface Step {
   target: string;
-  header?: {
-    title?: string;
-  },
+  title?: string;
   content: string;
   params?: StepOptions;
   duration?: number;
