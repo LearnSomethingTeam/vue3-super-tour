@@ -1,10 +1,10 @@
 # Vue 3 Super Tour
 
-Vue 3 Super Tour is a lightweight, simple and customizable feature tour plugin for use with Vue.js 3. It provides a quick and easy way to guide your users through your application.
+Vue 3 Super Tour is a lightweight, simple and customizable feature tour plugin for use with Vue 3. It provides a quick and easy way to guide your users through your application.
 
 We stand on the shoulders of giants: Vue 3 Super Tour was forked from [vue3-tour](https://github.com/alexandreDavid/vue3-tour), which was in turn forked from [vue-tour](https://github.com/pulsardev/vue-tour). The cycle continues.
 
-The "Super" means it has been ported to Typescript and made more Vue-y: using props and events rather than configuration objects and callbacks. It has also been ported from the Options API to the Composition API, which should minimize performance impact. Mostly this fork was made to ease our own build process at [Learn Something](https://github.com/LearnSomethingTeam).
+The "Super" means it has been ported to Typescript and made more Vue-y: replacing configuration objects with props, and adding emitted events alongside callbacks. It has also been ported from the Options API to the Composition API, which should minimize performance impact. Mostly this fork was made to ease our own build process at [Learn Something](https://github.com/LearnSomethingTeam).
 
 ![Vue Tour](./screenshot.gif "Vue Tour")
 
@@ -92,26 +92,120 @@ this.$tours['myTour'].start()
 
 For a more detailed documentation, checkout the [docs for vue-tour](https://github.com/pulsardev/vue-tour/wiki).
 
-## `before()` UI step functions
+## Event handling
 
-If you need to do UI setup work before a step, there's a `before` function you may include in any/each of
-your steps. This function will get invoked before the start/next/previous step is rendered. The function must return a promise. The function is invoked when `start`, `nextStep`, and `previousStep` are triggered. When the promise is rejected, it will not move to the next or previous step. If the promise is resolved then it will move in the direction specified.
+Event handling is possible using Vue event handlers or through callbacks on `Tour` and `Step` and thus `v-tour` and `v-step`, allowing programmatic reaction to any tour events. The callbacks are defined such that sync and async are both handled gracefully, and of course Vue event handlers do the same.
 
-It's used when you need to change what's shown on the screen between steps. For example, you may want to hide
-one set of menus and open a screen or you want to perform an async operation. This is especially useful in single-page applications.
+This comes in handy when you need to change what's shown on the screen between steps. For example, you may want to hide
+one set of menus and open a view, or maybe you need to perform an async operation. This is especially useful in single-page applications.
 
-```javascript
-steps: [
-  {
-    target: '#v-step-0',  // We're using document.querySelector() under the hood
-    content: `Discover <strong>Vue Tour</strong>!`,
-    before: type => new Promise((resolve, reject) => {
-      // Time-consuming UI/async operation here
-      resolve('foo')
-    })
+Event handling can be as simple as providing a callback in a step:
+
+```typescript
+const step = {
+  target: '#ok-button',
+  content: 'After that, click the OK button',
+  nextCallback() {
+    console.log('next clicked on OK button step');
   }
-]
+}
 ```
+
+The same could be accomplished by binding the `next` event: `<v-step ... @next="handleNext">`.
+
+Relevant callbacks and events can also be handled at the tour level, capturing events from any step:
+
+```typescript
+const tour = {
+  name: 'example-tour',
+  steps: [
+    {
+      target: '#ok-button',
+      content: 'After that, click the OK button',
+    }
+  ],
+  nextCallback(stepIdx: number) {
+    console.log('next was clicked on one of the steps', stepIdx);
+  }
+};
+```
+
+Use of events and callbacks is demonstrated in detail in the example app.
+
+### Tour events
+
+The following events are emitted by `v-tour`:
+```typescript
+(e: 'start', stepIdx: number): void;
+(e: 'stop', stepIdx: number): void;
+(e: 'skip', stepIdx: number): void;
+(e: 'finish', stepIdx: number): void;
+(e: 'prev', stepIdx: number): void;
+(e: 'next', stepIdx: number): void;
+(e: 'target-not-found', stepIdx: number, target: string): void;
+```
+
+### Tour callbacks
+
+The following callbacks can be bound on `v-tour`:
+
+```typescript
+/** Called when the tour starts */
+startCallback?: (stepIdx: number) => void | Promise<void>;
+
+/** Called when the tour is finished */
+finishCallback?: (stepIdx: number) => void | Promise<void>;
+
+/** Called if previous is chosen on the current step */
+prevCallback?: (stepIdx: number) => void | Promise<void>;
+
+/** Called if next is chosen on the current step */
+nextCallback?: (stepIdx: number) => void | Promise<void>;
+
+/** Called when the tour is skipped */
+skipCallback?: (stepIdx: number) => void | Promise<void>;
+
+/** Called any time the tour stops, whether finished or skipped or due to an error */
+stopCallback?: (stepIdx: number) => void | Promise<void>;
+
+/** Called if the current step's target isn't found */
+targetNotFoundCallback?: (stepIdx: number, target: string) => void | Promise<void>;
+```
+
+### Step events
+
+The following events are emitted by `v-step`:
+
+```typescript
+(e: 'stop'): void;
+(e: 'skip'): void;
+(e: 'finish'): void;
+(e: 'prev'): void;
+(e: 'next'): void;
+(e: 'target-not-found', target: string): void;
+```
+
+### Step callbacks
+
+The following callbacks can be bound on `v-step`:
+
+```typescript
+/** Called if previous is chosen on this step */
+prevCallback?: () => void | Promise<void>;
+
+/** Called if next is chosen on this step */
+nextCallback?: () => void | Promise<void>;
+
+/** Called if skip is chosen on this step */
+skipCallback?: () => void | Promise<void>;
+
+/** Called if the target is not found */
+targetNotFoundCallback?: (target: string) => void | Promise<void>;
+```
+
+## Known issues
+
+* The `$tours` object still isn't typed properly in the Typescript types
 
 ## Something Missing?
 
