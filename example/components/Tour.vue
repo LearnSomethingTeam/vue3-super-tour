@@ -44,7 +44,7 @@ export default {
           },
           {
             target: '.v-step-1',
-            content: 'An awesome plugin made with Vue.js!',
+            content: 'An awesome plugin made with Vue 3!',
             prevCallback() {
               console.log('prev from second step');
             },
