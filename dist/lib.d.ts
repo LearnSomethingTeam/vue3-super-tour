@@ -74,7 +74,7 @@ export interface TourState {
     skip: () => void;
     finish: () => void;
 }
-declare module '@vue/runtime-core' {
+declare module 'vue' {
     interface ComponentCustomProperties {
         $tours: Record<string, TourState>;
     }

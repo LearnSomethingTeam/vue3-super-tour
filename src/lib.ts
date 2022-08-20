@@ -98,7 +98,7 @@ export interface TourState {
 import VTour from './components/VTour.vue'
 import VStep from './components/VStep.vue'
 
-declare module '@vue/runtime-core' {
+declare module 'vue' {
   interface ComponentCustomProperties {
     $tours: Record<string, TourState>;
   }
