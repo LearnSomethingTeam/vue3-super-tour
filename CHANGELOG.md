@@ -1,3 +1,6 @@
+## 0.5.3
+* Declare type in 'vue' module as specified in official docs, see https://vuejs.org/guide/typescript/options-api.html#augmenting-global-properties
+
 ## 0.5.2
 * Declare type of $tours
 
