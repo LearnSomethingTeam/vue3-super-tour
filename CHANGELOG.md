@@ -1,3 +1,6 @@
+## 0.5.2
+* Declare type of $tours
+
 ## 0.5.1
 * Add missing build artifacts.
 

@@ -8,10 +8,6 @@ The "Super" means it has been ported to Typescript and made more Vue-y: replacin
 
 ![Vue Tour](./screenshot.gif "Vue Tour")
 
-## Table of Contents
-
-- [Getting Started](#getting-started)
-- [Something Missing?](#something-missing)
 
 ## Getting Started
 
@@ -202,10 +198,6 @@ skipCallback?: () => void | Promise<void>;
 /** Called if the target is not found */
 targetNotFoundCallback?: (target: string) => void | Promise<void>;
 ```
-
-## Known issues
-
-* The `$tours` object still isn't typed properly in the Typescript types
 
 ## Something Missing?
 
