@@ -71,10 +71,10 @@ const {
   debug,
 
   // These actually get handled by VTour
-  // prevCallback,
-  // nextCallback,
-  // skipCallback,
-  // targetNotFoundCallback
+  // prev,
+  // next,
+  // skip,
+  // targetNotFound
 } = defineProps<Step>();
 
 const hash = sum(target)

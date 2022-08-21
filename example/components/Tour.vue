@@ -35,23 +35,23 @@ export default {
             target: '#v-step-0',  // We're using document.querySelector() under the hood
             title: 'Get Started',
             content: `Discover <strong>Vue 3 Super Tour</strong>!`,
-            nextCallback() {
+            next() {
               console.log('next from first step');
             },
-            skipCallback() {
+            skip() {
               console.log('skip from first step');
             }
           },
           {
             target: '.v-step-1',
             content: 'An awesome plugin made with Vue 3!',
-            prevCallback() {
+            prev() {
               console.log('prev from second step');
             },
-            nextCallback() {
+            next() {
               console.log('next from second step');
             },
-            skipCallback() {
+            skip() {
               console.log('skip from second step');
             }
           },
@@ -61,45 +61,45 @@ export default {
             params: {
               placement: 'top' // Any valid Popper.js placement. See https://popper.js.org/popper-documentation.html#Popper.placements
             },
-            prevCallback() {
+            prev() {
               console.log('prev from third step');
             },
-            nextCallback() {
+            next() {
               console.log('next from third step');
             },
-            skipCallback() {
+            skip() {
               console.log('skip from third step');
             }
           },
           {
             target: '#fdjfksdfjsdkfjasdk',
             content: 'Non-existing target',
-            prevCallback() {
+            prev() {
               console.log('prev from fourth step');
             },
-            targetNotFoundCallback(target: string) {
+            targetNotFound(target: string) {
               console.warn('step targetNotFoundCallback', target);
             }
           }
         ],
         highlight: true,
-        startCallback(stepIdx: number) {
-          console.log('startCallback', stepIdx);
+        start(stepIdx: number) {
+          console.log('start callback', stepIdx);
         },
-        finishCallback(stepIdx: number) {
-          console.log('finishCallback', stepIdx);
+        finish(stepIdx: number) {
+          console.log('finish callback', stepIdx);
         },
-        prevCallback(stepIdx: number) {
-          console.log('prevCallback', stepIdx);
+        prev(stepIdx: number) {
+          console.log('prev callback', stepIdx);
         },
-        nextCallback(stepIdx: number) {
-          console.log('nextCallback', stepIdx);
+        next(stepIdx: number) {
+          console.log('next callback', stepIdx);
         },
-        stopCallback(stepIdx: number) {
-          console.log('stopCallback', stepIdx);
+        stop(stepIdx: number) {
+          console.log('stop callback', stepIdx);
         },
-        targetNotFoundCallback(stepIdx: number, target: string) {
-          console.warn('targetNotFoundCallback', stepIdx, target);
+        targetNotFound(stepIdx: number, target: string) {
+          console.warn('targetNotFound callback', stepIdx, target);
         }
       },
     }

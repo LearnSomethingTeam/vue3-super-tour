@@ -81,13 +81,13 @@ const {
   startTimeout = 0,
   stopOnTargetNotFound,
   useKeyboardNavigation = true,
-  startCallback,
-  finishCallback,
-  prevCallback,
-  nextCallback,
-  skipCallback,
-  stopCallback,
-  targetNotFoundCallback,
+  start: startCallback,
+  finish: finishCallback,
+  prev: prevCallback,
+  next: nextCallback,
+  skip: skipCallback,
+  stop: stopCallback,
+  targetNotFound: targetNotFoundCallback,
 } = defineProps<Tour>();
 
 const currentStep = ref(-1)
@@ -118,7 +118,7 @@ async function start(startStepIdx = 0) {
 async function previousStep() {
   let futureStep = currentStep.value - 1
   if (futureStep > -1) {
-    await step.value.prevCallback?.();
+    await step.value.prev?.();
     await prevCallback?.(currentStep.value);
     emit('prev', currentStep.value)
     currentStep.value = futureStep
@@ -128,7 +128,7 @@ async function previousStep() {
 async function nextStep() {
   let futureStep = currentStep.value + 1
   if (futureStep < numberOfSteps.value && currentStep.value !== -1) {
-    await step.value.nextCallback?.();
+    await step.value.next?.();
     await nextCallback?.(currentStep.value);
     emit('next', currentStep.value)
     currentStep.value = futureStep
@@ -143,7 +143,7 @@ async function stop() {
 }
 
 async function skip() {
-  await step.value.skipCallback?.();
+  await step.value.skip?.();
   await skipCallback?.(currentStep.value);
   emit('skip', currentStep.value);
   stop()
@@ -156,7 +156,7 @@ async function finish() {
 }
 
 async function targetNotFound(target: string) {
-  await step.value.targetNotFoundCallback?.(target);
+  await step.value.targetNotFound?.(target);
   await targetNotFoundCallback?.(currentStep.value, target);
   emit('target-not-found', currentStep.value, target);
 }

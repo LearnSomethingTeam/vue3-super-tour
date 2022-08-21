@@ -33,16 +33,16 @@ export interface Step {
   debug?: boolean;
 
   /** Called if previous is chosen on this step */
-  prevCallback?: () => void | Promise<void>;
+  prev?: () => void | Promise<void>;
 
   /** Called if next is chosen on this step */
-  nextCallback?: () => void | Promise<void>;
+  next?: () => void | Promise<void>;
 
   /** Called if skip is chosen on this step */
-  skipCallback?: () => void | Promise<void>;
+  skip?: () => void | Promise<void>;
 
   /** Called if the target is not found */
-  targetNotFoundCallback?: (target: string) => void | Promise<void>;
+  targetNotFound?: (target: string) => void | Promise<void>;
 }
 
 export interface Tour {
@@ -57,25 +57,25 @@ export interface Tour {
   useKeyboardNavigation?: boolean;
 
   /** Called when the tour starts */
-  startCallback?: (stepIdx: number) => void | Promise<void>;
+  start?: (stepIdx: number) => void | Promise<void>;
 
   /** Called when the tour is finished */
-  finishCallback?: (stepIdx: number) => void | Promise<void>;
+  finish?: (stepIdx: number) => void | Promise<void>;
 
   /** Called if previous is chosen on the current step */
-  prevCallback?: (stepIdx: number) => void | Promise<void>;
+  prev?: (stepIdx: number) => void | Promise<void>;
 
   /** Called if next is chosen on the current step */
-  nextCallback?: (stepIdx: number) => void | Promise<void>;
+  next?: (stepIdx: number) => void | Promise<void>;
 
   /** Called when the tour is skipped */
-  skipCallback?: (stepIdx: number) => void | Promise<void>;
+  skip?: (stepIdx: number) => void | Promise<void>;
 
   /** Called any time the tour stops, whether finished or skipped or due to an error */
-  stopCallback?: (stepIdx: number) => void | Promise<void>;
+  stop?: (stepIdx: number) => void | Promise<void>;
 
   /** Called if the current step's target isn't found */
-  targetNotFoundCallback?: (stepIdx: number, target: string) => void | Promise<void>;
+  targetNotFound?: (stepIdx: number, target: string) => void | Promise<void>;
 }
 
 /**
