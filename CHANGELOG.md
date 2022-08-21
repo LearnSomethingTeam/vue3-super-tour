@@ -1,3 +1,7 @@
+## 0.6.0
+* Shorten callback names
+* Introduce Step.shown, Step.hidden, Tour.stepShown, and Tour.stepHidden callbacks and corresponding events.
+
 ## 0.5.3
 * Declare type in 'vue' module as specified in official docs, see https://vuejs.org/guide/typescript/options-api.html#augmenting-global-properties
 

@@ -6,10 +6,12 @@ declare const _default: {
         $props: Partial<{}> & Omit<Readonly<import("vue").ExtractPropTypes<__VLS_TypePropsToRuntimeProps<Tour>>> & {
             onStop?: ((stepIdx: number) => any) | undefined;
             onStart?: ((stepIdx: number) => any) | undefined;
-            onSkip?: ((stepIdx: number) => any) | undefined;
             onFinish?: ((stepIdx: number) => any) | undefined;
+            onStepShown?: ((stepIdx: number) => any) | undefined;
+            onStepHidden?: ((stepIdx: number) => any) | undefined;
             onPrev?: ((stepIdx: number) => any) | undefined;
             onNext?: ((stepIdx: number) => any) | undefined;
+            onSkip?: ((stepIdx: number) => any) | undefined;
             "onTarget-not-found"?: ((stepIdx: number, target: string) => any) | undefined;
         } & import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, never>;
         $attrs: {
@@ -23,15 +25,17 @@ declare const _default: {
         }>;
         $root: import("vue").ComponentPublicInstance<{}, {}, {}, {}, {}, {}, {}, {}, false, import("vue").ComponentOptionsBase<any, any, any, any, any, any, any, any, any, {}>> | null;
         $parent: import("vue").ComponentPublicInstance<{}, {}, {}, {}, {}, {}, {}, {}, false, import("vue").ComponentOptionsBase<any, any, any, any, any, any, any, any, any, {}>> | null;
-        $emit: ((event: "stop", stepIdx: number) => void) & ((event: "start", stepIdx: number) => void) & ((event: "skip", stepIdx: number) => void) & ((event: "finish", stepIdx: number) => void) & ((event: "prev", stepIdx: number) => void) & ((event: "next", stepIdx: number) => void) & ((event: "target-not-found", stepIdx: number, target: string) => void);
+        $emit: ((event: "stop", stepIdx: number) => void) & ((event: "start", stepIdx: number) => void) & ((event: "finish", stepIdx: number) => void) & ((event: "stepShown", stepIdx: number) => void) & ((event: "stepHidden", stepIdx: number) => void) & ((event: "prev", stepIdx: number) => void) & ((event: "next", stepIdx: number) => void) & ((event: "skip", stepIdx: number) => void) & ((event: "target-not-found", stepIdx: number, target: string) => void);
         $el: any;
         $options: import("vue").ComponentOptionsBase<Readonly<import("vue").ExtractPropTypes<__VLS_TypePropsToRuntimeProps<Tour>>> & {
             onStop?: ((stepIdx: number) => any) | undefined;
             onStart?: ((stepIdx: number) => any) | undefined;
-            onSkip?: ((stepIdx: number) => any) | undefined;
             onFinish?: ((stepIdx: number) => any) | undefined;
+            onStepShown?: ((stepIdx: number) => any) | undefined;
+            onStepHidden?: ((stepIdx: number) => any) | undefined;
             onPrev?: ((stepIdx: number) => any) | undefined;
             onNext?: ((stepIdx: number) => any) | undefined;
+            onSkip?: ((stepIdx: number) => any) | undefined;
             "onTarget-not-found"?: ((stepIdx: number, target: string) => any) | undefined;
         }, {
             start: (startStepIdx?: number) => Promise<void>;
@@ -50,6 +54,10 @@ declare const _default: {
             start: (stepIdx: number) => void;
         } & {
             stop: (stepIdx: number) => void;
+        } & {
+            stepShown: (stepIdx: number) => void;
+        } & {
+            stepHidden: (stepIdx: number) => void;
         } & {
             skip: (stepIdx: number) => void;
         } & {
@@ -83,10 +91,12 @@ declare const _default: {
     } & Readonly<import("vue").ExtractPropTypes<__VLS_TypePropsToRuntimeProps<Tour>>> & {
         onStop?: ((stepIdx: number) => any) | undefined;
         onStart?: ((stepIdx: number) => any) | undefined;
-        onSkip?: ((stepIdx: number) => any) | undefined;
         onFinish?: ((stepIdx: number) => any) | undefined;
+        onStepShown?: ((stepIdx: number) => any) | undefined;
+        onStepHidden?: ((stepIdx: number) => any) | undefined;
         onPrev?: ((stepIdx: number) => any) | undefined;
         onNext?: ((stepIdx: number) => any) | undefined;
+        onSkip?: ((stepIdx: number) => any) | undefined;
         "onTarget-not-found"?: ((stepIdx: number, target: string) => any) | undefined;
     } & import("vue").ShallowUnwrapRef<{
         start: (startStepIdx?: number) => Promise<void>;
@@ -108,10 +118,12 @@ declare const _default: {
 } & import("vue").ComponentOptionsBase<Readonly<import("vue").ExtractPropTypes<__VLS_TypePropsToRuntimeProps<Tour>>> & {
     onStop?: ((stepIdx: number) => any) | undefined;
     onStart?: ((stepIdx: number) => any) | undefined;
-    onSkip?: ((stepIdx: number) => any) | undefined;
     onFinish?: ((stepIdx: number) => any) | undefined;
+    onStepShown?: ((stepIdx: number) => any) | undefined;
+    onStepHidden?: ((stepIdx: number) => any) | undefined;
     onPrev?: ((stepIdx: number) => any) | undefined;
     onNext?: ((stepIdx: number) => any) | undefined;
+    onSkip?: ((stepIdx: number) => any) | undefined;
     "onTarget-not-found"?: ((stepIdx: number, target: string) => any) | undefined;
 }, {
     start: (startStepIdx?: number) => Promise<void>;
@@ -130,6 +142,10 @@ declare const _default: {
     start: (stepIdx: number) => void;
 } & {
     stop: (stepIdx: number) => void;
+} & {
+    stepShown: (stepIdx: number) => void;
+} & {
+    stepHidden: (stepIdx: number) => void;
 } & {
     skip: (stepIdx: number) => void;
 } & {
