@@ -46,6 +46,8 @@ import type { Step } from '../lib';
 
 
 const emit = defineEmits<{
+  (e: 'shown'): void;
+  (e: 'hidden'): void;
   (e: 'stop'): void;
   (e: 'skip'): void;
   (e: 'finish'): void;
@@ -71,6 +73,8 @@ const {
   debug,
 
   // These actually get handled by VTour
+  // shown
+  // hidden
   // prev,
   // next,
   // skip,
@@ -175,9 +179,15 @@ const removeHighlight = () => {
   }
 }
 
-onMounted(createStep)
+onMounted(() => {
+  emit('shown');
+  createStep();
+})
 
-onUnmounted(removeHighlight)
+onUnmounted(() => {
+  removeHighlight();
+  emit('hidden');
+})
 </script>
 
 <style lang="scss" scoped>

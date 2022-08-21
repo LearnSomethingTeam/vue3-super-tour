@@ -134,6 +134,8 @@ The following events are emitted by `v-tour`:
 ```typescript
 (e: 'start', stepIdx: number): void;
 (e: 'stop', stepIdx: number): void;
+(e: 'stepShown', stepIdx: number): void;
+(e: 'stepHidden', stepIdx: number): void;
 (e: 'skip', stepIdx: number): void;
 (e: 'finish', stepIdx: number): void;
 (e: 'prev', stepIdx: number): void;
@@ -151,6 +153,12 @@ start?: (stepIdx: number) => void | Promise<void>;
 
 /** Called when the tour is finished */
 finish?: (stepIdx: number) => void | Promise<void>;
+
+/** Called when a step is shown */
+stepShown?: (stepIdx: number) => void | Promise<void>;
+
+/** Called when a step is hidden (after being shown) */
+stepHidden?: (stepIdx: number) => void | Promise<void>;
 
 /** Called if previous is chosen on the current step */
 prev?: (stepIdx: number) => void | Promise<void>;
@@ -173,6 +181,8 @@ targetNotFound?: (stepIdx: number, target: string) => void | Promise<void>;
 The following events are emitted by `v-step`:
 
 ```typescript
+(e: 'shown'): void;
+(e: 'hidden'): void;
 (e: 'stop'): void;
 (e: 'skip'): void;
 (e: 'finish'): void;
@@ -186,6 +196,12 @@ The following events are emitted by `v-step`:
 The following callbacks can be bound on `v-step`:
 
 ```typescript
+/** Called any time this step is shown */
+shown?: () => void | Promise<void>;
+
+/** Called any time this step is hidden (after having been shown) */
+hidden?: () => void | Promise<void>;
+
 /** Called if previous is chosen on this step */
 prev?: () => void | Promise<void>;
 

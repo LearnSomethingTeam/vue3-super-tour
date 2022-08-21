@@ -55,6 +55,8 @@ import { KEYS } from '../constants'
 const emit = defineEmits<{
   (e: 'start', stepIdx: number): void;
   (e: 'stop', stepIdx: number): void;
+  (e: 'stepShown', stepIdx: number): void;
+  (e: 'stepHidden', stepIdx: number): void;
   (e: 'skip', stepIdx: number): void;
   (e: 'finish', stepIdx: number): void;
   (e: 'prev', stepIdx: number): void;
@@ -83,6 +85,8 @@ const {
   useKeyboardNavigation = true,
   start: startCallback,
   finish: finishCallback,
+  stepShown: stepShownCallback,
+  stepHidden: stepHiddenCallback,
   prev: prevCallback,
   next: nextCallback,
   skip: skipCallback,
@@ -109,10 +113,26 @@ async function timeout(ms: number) {
 async function start(startStepIdx = 0) {
   await timeout(startTimeout);
 
+  currentStep.value = startStepIdx
+
   await startCallback?.(startStepIdx);
+  await stepShown(startStepIdx);
 
   emit('start', startStepIdx);
-  currentStep.value = startStepIdx
+}
+
+async function stepShown(stepIdx: number) {
+  await step.value.shown?.();
+  await stepShownCallback?.(stepIdx);
+  emit('stepShown', stepIdx);
+  // VSTep calls Step.shown callback
+}
+
+async function stepHidden(stepIdx: number) {
+  await step.value.hidden?.();
+  await stepHiddenCallback?.(stepIdx);
+  emit('stepHidden', stepIdx);
+  // VStep calls Step.hidden callback
 }
 
 async function previousStep() {
@@ -120,8 +140,10 @@ async function previousStep() {
   if (futureStep > -1) {
     await step.value.prev?.();
     await prevCallback?.(currentStep.value);
+    await stepHidden(currentStep.value);
     emit('prev', currentStep.value)
     currentStep.value = futureStep
+    await stepShown(currentStep.value);
   }
 }
 
@@ -130,12 +152,15 @@ async function nextStep() {
   if (futureStep < numberOfSteps.value && currentStep.value !== -1) {
     await step.value.next?.();
     await nextCallback?.(currentStep.value);
+    await stepHidden(currentStep.value);
     emit('next', currentStep.value)
     currentStep.value = futureStep
+    await stepShown(currentStep.value);
   }
 }
 
 async function stop() {
+  await stepHidden(currentStep.value);
   await stopCallback?.(currentStep.value);
   emit('stop', currentStep.value);
   document.body.classList.remove('v-tour--active')

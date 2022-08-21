@@ -32,6 +32,12 @@ export interface Step {
   stopOnFail?: boolean;
   debug?: boolean;
 
+  /** Called any time this step is shown */
+  shown?: () => void | Promise<void>;
+
+  /** Called any time this step is hidden (after having been shown) */
+  hidden?: () => void | Promise<void>;
+
   /** Called if previous is chosen on this step */
   prev?: () => void | Promise<void>;
 
@@ -61,6 +67,12 @@ export interface Tour {
 
   /** Called when the tour is finished */
   finish?: (stepIdx: number) => void | Promise<void>;
+
+  /** Called when a step is shown */
+  stepShown?: (stepIdx: number) => void | Promise<void>;
+
+  /** Called when a step is hidden (after being shown) */
+  stepHidden?: (stepIdx: number) => void | Promise<void>;
 
   /** Called if previous is chosen on the current step */
   prev?: (stepIdx: number) => void | Promise<void>;

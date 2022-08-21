@@ -8,6 +8,8 @@
       v-bind="tour"
       @start="startEvent"
       @stop="stopEvent"
+      @stepShown="stepShownEvent"
+      @stepHidden="stepHiddenEvent"
       @skip="skipEvent"
       @finish="finishEvent"
       @prev="prevEvent"
@@ -35,6 +37,12 @@ export default {
             target: '#v-step-0',  // We're using document.querySelector() under the hood
             title: 'Get Started',
             content: `Discover <strong>Vue 3 Super Tour</strong>!`,
+            shown() {
+              console.log('first step shown');
+            },
+            hidden() {
+              console.log('first step hidden');
+            },
             next() {
               console.log('next from first step');
             },
@@ -45,6 +53,12 @@ export default {
           {
             target: '.v-step-1',
             content: 'An awesome plugin made with Vue 3!',
+            shown() {
+              console.log('second step shown');
+            },
+            hidden() {
+              console.log('second step hidden');
+            },
             prev() {
               console.log('prev from second step');
             },
@@ -61,6 +75,12 @@ export default {
             params: {
               placement: 'top' // Any valid Popper.js placement. See https://popper.js.org/popper-documentation.html#Popper.placements
             },
+            shown() {
+              console.log('third step shown');
+            },
+            hidden() {
+              console.log('third step hidden');
+            },
             prev() {
               console.log('prev from third step');
             },
@@ -74,6 +94,12 @@ export default {
           {
             target: '#fdjfksdfjsdkfjasdk',
             content: 'Non-existing target',
+            shown() {
+              console.log('fourth step shown');
+            },
+            hidden() {
+              console.log('fourth step hidden');
+            },
             prev() {
               console.log('prev from fourth step');
             },
@@ -88,6 +114,12 @@ export default {
         },
         finish(stepIdx: number) {
           console.log('finish callback', stepIdx);
+        },
+        stepShown(stepIdx: number) {
+          console.log('stepShown callback', stepIdx);
+        },
+        stepHidden(stepIdx: number) {
+          console.log('stepHidden callback', stepIdx);
         },
         prev(stepIdx: number) {
           console.log('prev callback', stepIdx);
@@ -113,6 +145,12 @@ export default {
     },
     finishEvent(stepIdx: number) {
       console.log('finish event', stepIdx);
+    },
+    stepShownEvent(stepIdx: number) {
+      console.log('step shown event', stepIdx);
+    },
+    stepHiddenEvent(stepIdx: number) {
+      console.log('step hidden event', stepIdx);
     },
     stopEvent(stepIdx: number) {
       console.log('stop event', stepIdx);
