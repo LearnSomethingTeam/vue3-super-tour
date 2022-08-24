@@ -55,8 +55,8 @@ import { KEYS } from '../constants'
 const emit = defineEmits<{
   (e: 'start', stepIdx: number): void;
   (e: 'stop', stepIdx: number): void;
-  (e: 'stepShown', stepIdx: number): void;
-  (e: 'stepHidden', stepIdx: number): void;
+  (e: 'show', stepIdx: number): void;
+  (e: 'hide', stepIdx: number): void;
   (e: 'skip', stepIdx: number): void;
   (e: 'finish', stepIdx: number): void;
   (e: 'prev', stepIdx: number): void;
@@ -85,8 +85,8 @@ const {
   useKeyboardNavigation = true,
   start: startCallback,
   finish: finishCallback,
-  stepShown: stepShownCallback,
-  stepHidden: stepHiddenCallback,
+  show: stepShownCallback,
+  hide: stepHiddenCallback,
   prev: prevCallback,
   next: nextCallback,
   skip: skipCallback,
@@ -122,16 +122,16 @@ async function start(startStepIdx = 0) {
 }
 
 async function stepShown(stepIdx: number) {
-  await step.value.shown?.();
+  await step.value.show?.();
   await stepShownCallback?.(stepIdx);
-  emit('stepShown', stepIdx);
+  emit('show', stepIdx);
   // VSTep calls Step.shown callback
 }
 
 async function stepHidden(stepIdx: number) {
-  await step.value.hidden?.();
+  await step.value.hide?.();
   await stepHiddenCallback?.(stepIdx);
-  emit('stepHidden', stepIdx);
+  emit('hide', stepIdx);
   // VStep calls Step.hidden callback
 }
 

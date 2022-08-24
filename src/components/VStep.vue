@@ -46,8 +46,8 @@ import type { Step } from '../lib';
 
 
 const emit = defineEmits<{
-  (e: 'shown'): void;
-  (e: 'hidden'): void;
+  (e: 'show'): void;
+  (e: 'hide'): void;
   (e: 'stop'): void;
   (e: 'skip'): void;
   (e: 'finish'): void;
@@ -180,13 +180,13 @@ const removeHighlight = () => {
 }
 
 onMounted(() => {
-  emit('shown');
+  emit('show');
   createStep();
 })
 
 onUnmounted(() => {
   removeHighlight();
-  emit('hidden');
+  emit('hide');
 })
 </script>
 
