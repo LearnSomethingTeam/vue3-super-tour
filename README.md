@@ -181,13 +181,13 @@ targetNotFound?: (stepIdx: number, target: string) => void | Promise<void>;
 The following events are emitted by `v-step`:
 
 ```typescript
+(e: 'finish'): void;
 (e: 'show'): void;
 (e: 'hide'): void;
-(e: 'stop'): void;
-(e: 'skip'): void;
-(e: 'finish'): void;
 (e: 'prev'): void;
 (e: 'next'): void;
+(e: 'skip'): void;
+(e: 'stop'): void;
 (e: 'target-not-found', target: string): void;
 ```
 
@@ -196,6 +196,9 @@ The following events are emitted by `v-step`:
 The following callbacks can be bound on `v-step`:
 
 ```typescript
+/** Called if finish is chosen on this step */
+finish?: () => void | Promise<void>;
+
 /** Called any time this step is shown */
 show?: () => void | Promise<void>;
 
@@ -210,6 +213,9 @@ next?: () => void | Promise<void>;
 
 /** Called if skip is chosen on this step */
 skip?: () => void | Promise<void>;
+
+/** Called if the tour stops on this step, whether finished or skipped or due to an error */
+stop?: () => void | Promise<void>;
 
 /** Called if the target is not found */
 targetNotFound?: (target: string) => void | Promise<void>;
