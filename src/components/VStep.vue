@@ -1,8 +1,4 @@
 <template>
-  <!-- <teleport to="body"> -->
-    <!-- <div class="tour-mask" v-show="displayMask">
-      <div class="tour-focus-container" v-bind:style="styleFocusContainer"></div>
-    </div> -->
     <div class="v-step" :id="'v-step-' + hash" ref="VStep">
       <slot name="header">
         <div v-if="title" class="v-step__header">
@@ -28,7 +24,6 @@
 
       <div class="v-step__arrow" :class="{ 'v-step__arrow--dark': !!title }"></div>
     </div>
-  <!-- </teleport> -->
 </template>
 
 <script lang="ts">
@@ -66,7 +61,6 @@ const {
   isFirst,
   isLast,
   buttons,
-  displayMask,
   enableScrolling: propEnableScrolling,
   highlight,
   stopOnFail,
