@@ -1,3 +1,7 @@
+## 0.7.0
+* Further shorten callback names: `Step.shown` becomes `Step.show`, and `Step.hidden` becomes `Step.hide`; `Tour.stepShown` becomes `Tour.show`, and `Tour.stepHidden` becomes `Tour.hide`; corresponding event names are also adjusted.
+* Fix some stale documentation in README.md
+
 ## 0.6.0
 * Shorten callback names
 * Introduce Step.shown, Step.hidden, Tour.stepShown, and Tour.stepHidden callbacks and corresponding events.

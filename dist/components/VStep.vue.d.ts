@@ -6,12 +6,12 @@ declare const _default: {
         $props: Partial<{}> & Omit<Readonly<import("vue").ExtractPropTypes<__VLS_TypePropsToRuntimeProps<Step>>> & {
             onStop?: (() => any) | undefined;
             onFinish?: (() => any) | undefined;
+            onShow?: (() => any) | undefined;
+            onHide?: (() => any) | undefined;
             onPrev?: (() => any) | undefined;
             onNext?: (() => any) | undefined;
             onSkip?: (() => any) | undefined;
             "onTarget-not-found"?: ((target: string) => any) | undefined;
-            onShown?: (() => any) | undefined;
-            onHidden?: (() => any) | undefined;
         } & import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, never>;
         $attrs: {
             [x: string]: unknown;
@@ -24,21 +24,21 @@ declare const _default: {
         }>;
         $root: import("vue").ComponentPublicInstance<{}, {}, {}, {}, {}, {}, {}, {}, false, import("vue").ComponentOptionsBase<any, any, any, any, any, any, any, any, any, {}>> | null;
         $parent: import("vue").ComponentPublicInstance<{}, {}, {}, {}, {}, {}, {}, {}, false, import("vue").ComponentOptionsBase<any, any, any, any, any, any, any, any, any, {}>> | null;
-        $emit: ((event: "stop") => void) & ((event: "finish") => void) & ((event: "prev") => void) & ((event: "next") => void) & ((event: "skip") => void) & ((event: "target-not-found", target: string) => void) & ((event: "shown") => void) & ((event: "hidden") => void);
+        $emit: ((event: "stop") => void) & ((event: "finish") => void) & ((event: "show") => void) & ((event: "hide") => void) & ((event: "prev") => void) & ((event: "next") => void) & ((event: "skip") => void) & ((event: "target-not-found", target: string) => void);
         $el: any;
         $options: import("vue").ComponentOptionsBase<Readonly<import("vue").ExtractPropTypes<__VLS_TypePropsToRuntimeProps<Step>>> & {
             onStop?: (() => any) | undefined;
             onFinish?: (() => any) | undefined;
+            onShow?: (() => any) | undefined;
+            onHide?: (() => any) | undefined;
             onPrev?: (() => any) | undefined;
             onNext?: (() => any) | undefined;
             onSkip?: (() => any) | undefined;
             "onTarget-not-found"?: ((target: string) => any) | undefined;
-            onShown?: (() => any) | undefined;
-            onHidden?: (() => any) | undefined;
         }, {}, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {
-            shown: () => void;
+            show: () => void;
         } & {
-            hidden: () => void;
+            hide: () => void;
         } & {
             stop: () => void;
         } & {
@@ -74,12 +74,12 @@ declare const _default: {
     } & Readonly<import("vue").ExtractPropTypes<__VLS_TypePropsToRuntimeProps<Step>>> & {
         onStop?: (() => any) | undefined;
         onFinish?: (() => any) | undefined;
+        onShow?: (() => any) | undefined;
+        onHide?: (() => any) | undefined;
         onPrev?: (() => any) | undefined;
         onNext?: (() => any) | undefined;
         onSkip?: (() => any) | undefined;
         "onTarget-not-found"?: ((target: string) => any) | undefined;
-        onShown?: (() => any) | undefined;
-        onHidden?: (() => any) | undefined;
     } & import("vue").ShallowUnwrapRef<{}> & {} & import("vue").ComponentCustomProperties;
     __isFragment?: undefined;
     __isTeleport?: undefined;
@@ -87,16 +87,16 @@ declare const _default: {
 } & import("vue").ComponentOptionsBase<Readonly<import("vue").ExtractPropTypes<__VLS_TypePropsToRuntimeProps<Step>>> & {
     onStop?: (() => any) | undefined;
     onFinish?: (() => any) | undefined;
+    onShow?: (() => any) | undefined;
+    onHide?: (() => any) | undefined;
     onPrev?: (() => any) | undefined;
     onNext?: (() => any) | undefined;
     onSkip?: (() => any) | undefined;
     "onTarget-not-found"?: ((target: string) => any) | undefined;
-    onShown?: (() => any) | undefined;
-    onHidden?: (() => any) | undefined;
 }, {}, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {
-    shown: () => void;
+    show: () => void;
 } & {
-    hidden: () => void;
+    hide: () => void;
 } & {
     stop: () => void;
 } & {

@@ -25,9 +25,9 @@ export interface Step {
     stopOnFail?: boolean;
     debug?: boolean;
     /** Called any time this step is shown */
-    shown?: () => void | Promise<void>;
+    show?: () => void | Promise<void>;
     /** Called any time this step is hidden (after having been shown) */
-    hidden?: () => void | Promise<void>;
+    hide?: () => void | Promise<void>;
     /** Called if previous is chosen on this step */
     prev?: () => void | Promise<void>;
     /** Called if next is chosen on this step */
@@ -52,9 +52,9 @@ export interface Tour {
     /** Called when the tour is finished */
     finish?: (stepIdx: number) => void | Promise<void>;
     /** Called when a step is shown */
-    stepShown?: (stepIdx: number) => void | Promise<void>;
+    show?: (stepIdx: number) => void | Promise<void>;
     /** Called when a step is hidden (after being shown) */
-    stepHidden?: (stepIdx: number) => void | Promise<void>;
+    hide?: (stepIdx: number) => void | Promise<void>;
     /** Called if previous is chosen on the current step */
     prev?: (stepIdx: number) => void | Promise<void>;
     /** Called if next is chosen on the current step */
