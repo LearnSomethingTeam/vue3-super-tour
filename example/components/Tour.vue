@@ -37,6 +37,9 @@ export default {
             target: '#v-step-0',  // We're using document.querySelector() under the hood
             title: 'Get Started',
             content: `Discover <strong>Vue 3 Super Tour</strong>!`,
+            finish() {
+              console.log('finish from first step');
+            },
             show() {
               console.log('first step shown');
             },
@@ -48,11 +51,17 @@ export default {
             },
             skip() {
               console.log('skip from first step');
-            }
+            },
+            stop() {
+              console.log('stopped from first step');
+            },
           },
           {
             target: '.v-step-1',
             content: 'An awesome plugin made with Vue 3!',
+            finish() {
+              console.log('finish from second step');
+            },
             show() {
               console.log('second step shown');
             },
@@ -67,13 +76,19 @@ export default {
             },
             skip() {
               console.log('skip from second step');
-            }
+            },
+            stop() {
+              console.log('stopped from second step');
+            },
           },
           {
             target: '[data-v-step="2"]',
             content: 'Try it, you\'ll love it!<br>You can put HTML in the steps and completely customize the DOM to suit your needs.',
             params: {
               placement: 'top' // Any valid Popper.js placement. See https://popper.js.org/popper-documentation.html#Popper.placements
+            },
+            finish() {
+              console.log('finish from third step');
             },
             show() {
               console.log('third step shown');
@@ -89,11 +104,17 @@ export default {
             },
             skip() {
               console.log('skip from third step');
-            }
+            },
+            stop() {
+              console.log('stopped from third step');
+            },
           },
           {
             target: '#fdjfksdfjsdkfjasdk',
             content: 'Non-existing target',
+            finish() {
+              console.log('finish from fourth step');
+            },
             show() {
               console.log('fourth step shown');
             },
@@ -102,6 +123,9 @@ export default {
             },
             prev() {
               console.log('prev from fourth step');
+            },
+            stop() {
+              console.log('stopped from fourth step');
             },
             targetNotFound(target: string) {
               console.warn('step targetNotFoundCallback', target);
