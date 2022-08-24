@@ -160,6 +160,7 @@ async function nextStep() {
 }
 
 async function stop() {
+  await step.value.stop?.();
   await stepHidden(currentStep.value);
   await stopCallback?.(currentStep.value);
   emit('stop', currentStep.value);
@@ -175,6 +176,7 @@ async function skip() {
 }
 
 async function finish() {
+  await step.value.finish?.();
   await finishCallback?.(currentStep.value);
   emit('finish', currentStep.value);
   stop()
