@@ -24,6 +24,8 @@ export interface Step {
     highlight?: boolean;
     stopOnFail?: boolean;
     debug?: boolean;
+    /** Called if finish is chosen on this step */
+    finish?: () => void | Promise<void>;
     /** Called any time this step is shown */
     show?: () => void | Promise<void>;
     /** Called any time this step is hidden (after having been shown) */
@@ -34,6 +36,8 @@ export interface Step {
     next?: () => void | Promise<void>;
     /** Called if skip is chosen on this step */
     skip?: () => void | Promise<void>;
+    /** Called if the tour stops on this step, whether finished or skipped or due to an error */
+    stop?: () => void | Promise<void>;
     /** Called if the target is not found */
     targetNotFound?: (target: string) => void | Promise<void>;
 }

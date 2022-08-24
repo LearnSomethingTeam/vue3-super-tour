@@ -36,19 +36,19 @@ declare const _default: {
             onSkip?: (() => any) | undefined;
             "onTarget-not-found"?: ((target: string) => any) | undefined;
         }, {}, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {
+            finish: () => void;
+        } & {
             show: () => void;
         } & {
             hide: () => void;
         } & {
-            stop: () => void;
-        } & {
-            skip: () => void;
-        } & {
-            finish: () => void;
-        } & {
             prev: () => void;
         } & {
             next: () => void;
+        } & {
+            skip: () => void;
+        } & {
+            stop: () => void;
         } & {
             "target-not-found": (target: string) => void;
         }, string, {}> & {
@@ -94,19 +94,19 @@ declare const _default: {
     onSkip?: (() => any) | undefined;
     "onTarget-not-found"?: ((target: string) => any) | undefined;
 }, {}, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {
+    finish: () => void;
+} & {
     show: () => void;
 } & {
     hide: () => void;
 } & {
-    stop: () => void;
-} & {
-    skip: () => void;
-} & {
-    finish: () => void;
-} & {
     prev: () => void;
 } & {
     next: () => void;
+} & {
+    skip: () => void;
+} & {
+    stop: () => void;
 } & {
     "target-not-found": (target: string) => void;
 }, string, {}> & import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps & (new () => {

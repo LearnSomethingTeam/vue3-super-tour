@@ -1,3 +1,8 @@
+## 0.8.0 - 24 Aug 2022
+* Drop unused prop `VStep.displayMask` and associated cruft
+* Add missing `Step.finish` and `Step.stop` callbacks
+* Minor cleanups
+
 ## 0.7.0
 * Further shorten callback names: `Step.shown` becomes `Step.show`, and `Step.hidden` becomes `Step.hide`; `Tour.stepShown` becomes `Tour.show`, and `Tour.stepHidden` becomes `Tour.hide`; corresponding event names are also adjusted.
 * Fix some stale documentation in README.md
