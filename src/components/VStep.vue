@@ -41,13 +41,13 @@ import type { Step } from '../lib';
 
 
 const emit = defineEmits<{
+  (e: 'finish'): void;
   (e: 'show'): void;
   (e: 'hide'): void;
-  (e: 'stop'): void;
-  (e: 'skip'): void;
-  (e: 'finish'): void;
   (e: 'prev'): void;
   (e: 'next'): void;
+  (e: 'skip'): void;
+  (e: 'stop'): void;
   (e: 'target-not-found', target: string): void;
 }>();
 
@@ -67,12 +67,14 @@ const {
   debug,
 
   // These actually get handled by VTour
-  // shown
-  // hidden
+  // finish,
+  // show,
+  // hide,
   // prev,
   // next,
   // skip,
-  // targetNotFound
+  // stop,
+  // targetNotFound,
 } = defineProps<Step>();
 
 const hash = sum(target)
