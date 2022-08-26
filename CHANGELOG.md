@@ -31,11 +31,11 @@ This release unifies the exported API for smoother interaction between template 
 
 ## 0.4.5
 
-Move type declarations into root, allowing their direct export
+* Move type declarations into root, allowing their direct export
 
 ## 0.4.4
 
-Attempt to wildcard export types
+* Attempt to wildcard export types
 
 ## 0.4.0
 
