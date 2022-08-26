@@ -203,9 +203,6 @@ onUnmounted(() => {
       border-style: solid;
       position: absolute;
       margin: 0.5rem;
-    }
-
-    & .v-step__arrow {
       border-color: #50596c; /* #ffc107, #35495e */
 
       &--dark {
@@ -215,62 +212,62 @@ onUnmounted(() => {
 
     &[data-popper-placement^="top"] {
       margin-bottom: 0.5rem !important;
-    }
 
-    &[data-popper-placement^="top"] .v-step__arrow {
-      border-width: 0.5rem 0.5rem 0 0.5rem;
-      border-left-color: transparent;
-      border-right-color: transparent;
-      border-bottom-color: transparent;
-      bottom: -0.5rem;
-      left: calc(50% - 1rem);
-      margin-top: 0;
-      margin-bottom: 0;
+      & .v-step__arrow {
+        border-width: 0.5rem 0.5rem 0 0.5rem;
+        border-left-color: transparent;
+        border-right-color: transparent;
+        border-bottom-color: transparent;
+        bottom: -0.5rem;
+        left: calc(50% - 1rem);
+        margin-top: 0;
+        margin-bottom: 0;
+      }
     }
 
     &[data-popper-placement^="bottom"] {
       margin-top: 0.5rem !important;
-    }
 
-    &[data-popper-placement^="bottom"] .v-step__arrow {
-      border-width: 0 0.5rem 0.5rem 0.5rem;
-      border-left-color: transparent;
-      border-right-color: transparent;
-      border-top-color: transparent;
-      top: -0.5rem;
-      left: calc(50% - 1rem);
-      margin-top: 0;
-      margin-bottom: 0;
+      & .v-step__arrow {
+        border-width: 0 0.5rem 0.5rem 0.5rem;
+        border-left-color: transparent;
+        border-right-color: transparent;
+        border-top-color: transparent;
+        top: -0.5rem;
+        left: calc(50% - 1rem);
+        margin-top: 0;
+        margin-bottom: 0;
+      }
     }
 
     &[data-popper-placement^="right"] {
       margin-left: 0.5rem !important;
-    }
 
-    &[data-popper-placement^="right"] .v-step__arrow {
-      border-width: 0.5rem 0.5rem 0.5rem 0;
-      border-left-color: transparent;
-      border-top-color: transparent;
-      border-bottom-color: transparent;
-      left: -0.5rem;
-      top: calc(50% - 1rem);
-      margin-left: 0;
-      margin-right: 0;
+      & .v-step__arrow {
+        border-width: 0.5rem 0.5rem 0.5rem 0;
+        border-left-color: transparent;
+        border-top-color: transparent;
+        border-bottom-color: transparent;
+        left: -0.5rem;
+        top: calc(50% - 1rem);
+        margin-left: 0;
+        margin-right: 0;
+      }
     }
 
     &[data-popper-placement^="left"] {
       margin-right: 0.5rem !important;
-    }
 
-    &[data-popper-placement^="left"] .v-step__arrow {
-      border-width: 0.5rem 0 0.5rem 0.5rem;
-      border-top-color: transparent;
-      border-right-color: transparent;
-      border-bottom-color: transparent;
-      right: -0.5rem;
-      top: calc(50% - 1rem);
-      margin-left: 0;
-      margin-right: 0;
+      & .v-step__arrow {
+        border-width: 0.5rem 0 0.5rem 0.5rem;
+        border-top-color: transparent;
+        border-right-color: transparent;
+        border-bottom-color: transparent;
+        right: -0.5rem;
+        top: calc(50% - 1rem);
+        margin-left: 0;
+        margin-right: 0;
+      }
     }
   }
 
