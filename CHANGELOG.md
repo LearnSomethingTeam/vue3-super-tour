@@ -1,3 +1,9 @@
+## 0.9.0 - 26 Aug 2022
+* BUG FIX: Replace Popper 1 attribute `x-placement` with Popper 2 attribute `data-popper-placement`
+           This restores the arrows, which had disappeared
+* Take advantage of SASS in the styles
+* Do not scope VStep style---this makes the styles again overridable
+
 ## 0.8.0 - 24 Aug 2022
 * Drop unused prop `VStep.displayMask` and associated cruft
 * Add missing `Step.finish` and `Step.stop` callbacks

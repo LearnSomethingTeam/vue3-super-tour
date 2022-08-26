@@ -57,49 +57,49 @@ const q = {
   emits: ["start", "stop", "show", "hide", "skip", "finish", "prev", "next", "target-not-found"],
   setup(e, { expose: t, emit: n }) {
     const r = mt(-1), o = ne(() => r.value > -1 && r.value < u.value), a = ne(() => r.value === 0), s = ne(() => r.value === e.steps.length - 1), u = ne(() => e.steps.length), i = ne(() => e.steps[r.value]);
-    async function p(c) {
-      return new Promise((f) => setTimeout(f, c));
+    async function p(f) {
+      return new Promise((c) => setTimeout(c, f));
     }
-    async function l(c = 0) {
-      var f;
-      await p(e.startTimeout), r.value = c, await ((f = e.start) == null ? void 0 : f.call(e, c)), await d(c), n("start", c);
+    async function l(f = 0) {
+      var c;
+      await p(e.startTimeout), r.value = f, await ((c = e.start) == null ? void 0 : c.call(e, f)), await d(f), n("start", f);
     }
-    async function d(c) {
-      var f, v, g;
-      await ((v = (f = i.value).show) == null ? void 0 : v.call(f)), await ((g = e.show) == null ? void 0 : g.call(e, c)), n("show", c);
+    async function d(f) {
+      var c, v, g;
+      await ((v = (c = i.value).show) == null ? void 0 : v.call(c)), await ((g = e.show) == null ? void 0 : g.call(e, f)), n("show", f);
     }
-    async function y(c) {
-      var f, v, g;
-      await ((v = (f = i.value).hide) == null ? void 0 : v.call(f)), await ((g = e.hide) == null ? void 0 : g.call(e, c)), n("hide", c);
+    async function y(f) {
+      var c, v, g;
+      await ((v = (c = i.value).hide) == null ? void 0 : v.call(c)), await ((g = e.hide) == null ? void 0 : g.call(e, f)), n("hide", f);
     }
     async function h() {
-      var f, v, g;
-      let c = r.value - 1;
-      c > -1 && (await ((v = (f = i.value).prev) == null ? void 0 : v.call(f)), await ((g = e.prev) == null ? void 0 : g.call(e, r.value)), await y(r.value), n("prev", r.value), r.value = c, await d(r.value));
+      var c, v, g;
+      let f = r.value - 1;
+      f > -1 && (await ((v = (c = i.value).prev) == null ? void 0 : v.call(c)), await ((g = e.prev) == null ? void 0 : g.call(e, r.value)), await y(r.value), n("prev", r.value), r.value = f, await d(r.value));
     }
     async function w() {
-      var f, v, g;
-      let c = r.value + 1;
-      c < u.value && r.value !== -1 && (await ((v = (f = i.value).next) == null ? void 0 : v.call(f)), await ((g = e.next) == null ? void 0 : g.call(e, r.value)), await y(r.value), n("next", r.value), r.value = c, await d(r.value));
+      var c, v, g;
+      let f = r.value + 1;
+      f < u.value && r.value !== -1 && (await ((v = (c = i.value).next) == null ? void 0 : v.call(c)), await ((g = e.next) == null ? void 0 : g.call(e, r.value)), await y(r.value), n("next", r.value), r.value = f, await d(r.value));
     }
     async function m() {
-      var c, f, v;
-      await ((f = (c = i.value).stop) == null ? void 0 : f.call(c)), await y(r.value), await ((v = e.stop) == null ? void 0 : v.call(e, r.value)), n("stop", r.value), document.body.classList.remove("v-tour--active"), r.value = -1;
+      var f, c, v;
+      await ((c = (f = i.value).stop) == null ? void 0 : c.call(f)), await y(r.value), await ((v = e.stop) == null ? void 0 : v.call(e, r.value)), n("stop", r.value), document.body.classList.remove("v-tour--active"), r.value = -1;
     }
     async function b() {
-      var c, f, v;
-      await ((f = (c = i.value).skip) == null ? void 0 : f.call(c)), await ((v = e.skip) == null ? void 0 : v.call(e, r.value)), n("skip", r.value), m();
+      var f, c, v;
+      await ((c = (f = i.value).skip) == null ? void 0 : c.call(f)), await ((v = e.skip) == null ? void 0 : v.call(e, r.value)), n("skip", r.value), m();
     }
     async function E() {
-      var c, f, v;
-      await ((f = (c = i.value).finish) == null ? void 0 : f.call(c)), await ((v = e.finish) == null ? void 0 : v.call(e, r.value)), n("finish", r.value), m();
+      var f, c, v;
+      await ((c = (f = i.value).finish) == null ? void 0 : c.call(f)), await ((v = e.finish) == null ? void 0 : v.call(e, r.value)), n("finish", r.value), m();
     }
-    async function O(c) {
-      var f, v, g;
-      await ((v = (f = i.value).targetNotFound) == null ? void 0 : v.call(f, c)), await ((g = e.targetNotFound) == null ? void 0 : g.call(e, r.value, c)), n("target-not-found", r.value, c);
+    async function O(f) {
+      var c, v, g;
+      await ((v = (c = i.value).targetNotFound) == null ? void 0 : v.call(c, f)), await ((g = e.targetNotFound) == null ? void 0 : g.call(e, r.value, f)), n("target-not-found", r.value, f);
     }
-    function x(c) {
-      switch (e.debug && console.log("[Vue Tour] A keyup event occured:", c), c.keyCode) {
+    function x(f) {
+      switch (e.debug && console.log("[Vue Tour] A keyup event occured:", f), f.keyCode) {
         case je.ARROW_RIGHT:
           e.keys.ARROW_RIGHT && w();
           break;
@@ -112,14 +112,14 @@ const q = {
       }
     }
     return t({ start: l, stop: m, skip: b, finish: E, previousStep: h, nextStep: w, currentStep: r, isRunning: o, isFirst: a, isLast: s, numberOfSteps: u, step: i }), gt(() => {
-      const c = { step: i, start: l, isRunning: o, currentStep: r, isFirst: a, isLast: s, previousStep: h, nextStep: w, stop: m, skip: b, finish: E }, f = Dt();
-      f.appContext.config.globalProperties.$tours[e.name] = c, e.useKeyboardNavigation && window.addEventListener("keyup", x);
+      const f = { step: i, start: l, isRunning: o, currentStep: r, isFirst: a, isLast: s, previousStep: h, nextStep: w, stop: m, skip: b, finish: E }, c = Dt();
+      c.appContext.config.globalProperties.$tours[e.name] = f, e.useKeyboardNavigation && window.addEventListener("keyup", x);
     }), $t(() => {
       e.useKeyboardNavigation && window.removeEventListener("keyup", x);
-    }), (c, f) => {
+    }), (f, c) => {
       const v = Bt("v-step");
       return M(), Y("div", Ht, [
-        Re(c.$slots, "default", {
+        Re(f.$slots, "default", {
           currentStep: r.value,
           steps: e.steps,
           onPreviousStep: h,
@@ -347,7 +347,7 @@ var an = function(t, n) {
 function sn(e) {
   var t, n = e.state, r = e.name, o = e.options, a = n.elements.arrow, s = n.modifiersData.popperOffsets, u = V(n.placement), i = We(u), p = [L, I].indexOf(u) >= 0, l = p ? "height" : "width";
   if (!(!a || !s)) {
-    var d = an(o.padding, n), y = Me(a), h = i === "y" ? P : L, w = i === "y" ? B : I, m = n.rects.reference[l] + n.rects.reference[i] - s[i] - n.rects.popper[l], b = s[i] - n.rects.reference[i], E = be(a), O = E ? i === "y" ? E.clientHeight || 0 : E.clientWidth || 0 : 0, x = m / 2 - b / 2, c = d[h], f = O - y[l] - d[w], v = O / 2 - y[l] / 2 + x, g = de(c, v, f), A = i;
+    var d = an(o.padding, n), y = Me(a), h = i === "y" ? P : L, w = i === "y" ? B : I, m = n.rects.reference[l] + n.rects.reference[i] - s[i] - n.rects.popper[l], b = s[i] - n.rects.reference[i], E = be(a), O = E ? i === "y" ? E.clientHeight || 0 : E.clientWidth || 0 : 0, x = m / 2 - b / 2, f = d[h], c = O - y[l] - d[w], v = O / 2 - y[l] / 2 + x, g = de(f, v, c), A = i;
     n.modifiersData[r] = (t = {}, t[A] = g, t.centerOffset = g - v, t);
   }
 }
@@ -373,13 +373,13 @@ const ln = {
 function ue(e) {
   return e.split("-")[1];
 }
-var cn = {
+var fn = {
   top: "auto",
   right: "auto",
   bottom: "auto",
   left: "auto"
 };
-function fn(e) {
+function cn(e) {
   var t = e.x, n = e.y, r = window, o = r.devicePixelRatio || 1;
   return {
     x: ie(t * o) / o || 0,
@@ -395,23 +395,23 @@ function ot(e) {
     y: m
   };
   h = b.x, m = b.y;
-  var E = s.hasOwnProperty("x"), O = s.hasOwnProperty("y"), x = L, c = P, f = window;
+  var E = s.hasOwnProperty("x"), O = s.hasOwnProperty("y"), x = L, f = P, c = window;
   if (p) {
     var v = be(n), g = "clientHeight", A = "clientWidth";
     if (v === H(n) && (v = z(n), F(v).position !== "static" && u === "absolute" && (g = "scrollHeight", A = "scrollWidth")), v = v, o === P || (o === L || o === I) && a === me) {
-      c = B;
-      var T = d && v === f && f.visualViewport ? f.visualViewport.height : v[g];
+      f = B;
+      var T = d && v === c && c.visualViewport ? c.visualViewport.height : v[g];
       m -= T - r.height, m *= i ? 1 : -1;
     }
     if (o === L || (o === P || o === B) && a === me) {
       x = I;
-      var k = d && v === f && f.visualViewport ? f.visualViewport.width : v[A];
+      var k = d && v === c && c.visualViewport ? c.visualViewport.width : v[A];
       h -= k - r.width, h *= i ? 1 : -1;
     }
   }
   var S = Object.assign({
     position: u
-  }, p && cn), R = l === !0 ? fn({
+  }, p && fn), R = l === !0 ? cn({
     x: h,
     y: m
   }) : {
@@ -420,9 +420,9 @@ function ot(e) {
   };
   if (h = R.x, m = R.y, i) {
     var N;
-    return Object.assign({}, S, (N = {}, N[c] = O ? "0" : "", N[x] = E ? "0" : "", N.transform = (f.devicePixelRatio || 1) <= 1 ? "translate(" + h + "px, " + m + "px)" : "translate3d(" + h + "px, " + m + "px, 0)", N));
+    return Object.assign({}, S, (N = {}, N[f] = O ? "0" : "", N[x] = E ? "0" : "", N.transform = (c.devicePixelRatio || 1) <= 1 ? "translate(" + h + "px, " + m + "px)" : "translate3d(" + h + "px, " + m + "px, 0)", N));
   }
-  return Object.assign({}, S, (t = {}, t[c] = O ? m + "px" : "", t[x] = E ? h + "px" : "", t.transform = "", t));
+  return Object.assign({}, S, (t = {}, t[f] = O ? m + "px" : "", t[x] = E ? h + "px" : "", t.transform = "", t));
 }
 function vn(e) {
   var t = e.state, n = e.options, r = n.gpuAcceleration, o = r === void 0 ? !0 : r, a = n.adaptive, s = a === void 0 ? !0 : a, u = n.roundOffsets, i = u === void 0 ? !0 : u;
@@ -625,12 +625,12 @@ function At(e) {
 }
 function ge(e, t) {
   t === void 0 && (t = {});
-  var n = t, r = n.placement, o = r === void 0 ? e.placement : r, a = n.boundary, s = a === void 0 ? Wt : a, u = n.rootBoundary, i = u === void 0 ? yt : u, p = n.elementContext, l = p === void 0 ? pe : p, d = n.altBoundary, y = d === void 0 ? !1 : d, h = n.padding, w = h === void 0 ? 0 : h, m = xt(typeof w != "number" ? w : Et(w, ye)), b = l === pe ? qt : pe, E = e.rects.popper, O = e.elements[y ? b : l], x = xn(ae(O) ? O : O.contextElement || z(e.elements.popper), s, i), c = se(e.elements.reference), f = At({
-    reference: c,
+  var n = t, r = n.placement, o = r === void 0 ? e.placement : r, a = n.boundary, s = a === void 0 ? Wt : a, u = n.rootBoundary, i = u === void 0 ? yt : u, p = n.elementContext, l = p === void 0 ? pe : p, d = n.altBoundary, y = d === void 0 ? !1 : d, h = n.padding, w = h === void 0 ? 0 : h, m = xt(typeof w != "number" ? w : Et(w, ye)), b = l === pe ? qt : pe, E = e.rects.popper, O = e.elements[y ? b : l], x = xn(ae(O) ? O : O.contextElement || z(e.elements.popper), s, i), f = se(e.elements.reference), c = At({
+    reference: f,
     element: E,
     strategy: "absolute",
     placement: o
-  }), v = Fe(Object.assign({}, E, f)), g = l === pe ? v : c, A = {
+  }), v = Fe(Object.assign({}, E, c)), g = l === pe ? v : f, A = {
     top: x.top - g.top + m.top,
     bottom: g.bottom - x.bottom + m.bottom,
     left: x.left - g.left + m.left,
@@ -674,7 +674,7 @@ function Sn(e) {
 function An(e) {
   var t = e.state, n = e.options, r = e.name;
   if (!t.modifiersData[r]._skip) {
-    for (var o = n.mainAxis, a = o === void 0 ? !0 : o, s = n.altAxis, u = s === void 0 ? !0 : s, i = n.fallbackPlacements, p = n.padding, l = n.boundary, d = n.rootBoundary, y = n.altBoundary, h = n.flipVariations, w = h === void 0 ? !0 : h, m = n.allowedAutoPlacements, b = t.options.placement, E = V(b), O = E === b, x = i || (O || !w ? [Pe(b)] : Sn(b)), c = [b].concat(x).reduce(function(ee, U) {
+    for (var o = n.mainAxis, a = o === void 0 ? !0 : o, s = n.altAxis, u = s === void 0 ? !0 : s, i = n.fallbackPlacements, p = n.padding, l = n.boundary, d = n.rootBoundary, y = n.altBoundary, h = n.flipVariations, w = h === void 0 ? !0 : h, m = n.allowedAutoPlacements, b = t.options.placement, E = V(b), O = E === b, x = i || (O || !w ? [Pe(b)] : Sn(b)), f = [b].concat(x).reduce(function(ee, U) {
       return ee.concat(V(U) === Ne ? En(t, {
         placement: U,
         boundary: l,
@@ -683,15 +683,15 @@ function An(e) {
         flipVariations: w,
         allowedAutoPlacements: m
       }) : U);
-    }, []), f = t.rects.reference, v = t.rects.popper, g = /* @__PURE__ */ new Map(), A = !0, T = c[0], k = 0; k < c.length; k++) {
-      var S = c[k], R = V(S), N = ue(S) === oe, le = [P, B].indexOf(R) >= 0, ce = le ? "width" : "height", C = ge(t, {
+    }, []), c = t.rects.reference, v = t.rects.popper, g = /* @__PURE__ */ new Map(), A = !0, T = f[0], k = 0; k < f.length; k++) {
+      var S = f[k], R = V(S), N = ue(S) === oe, le = [P, B].indexOf(R) >= 0, fe = le ? "width" : "height", C = ge(t, {
         placement: S,
         boundary: l,
         rootBoundary: d,
         altBoundary: y,
         padding: p
       }), j = le ? N ? I : L : N ? B : P;
-      f[ce] > v[ce] && (j = Pe(j));
+      c[fe] > v[fe] && (j = Pe(j));
       var we = Pe(j), K = [];
       if (a && K.push(C[R] <= 0), u && K.push(C[j] <= 0, C[we] <= 0), K.every(function(ee) {
         return ee;
@@ -703,7 +703,7 @@ function An(e) {
     }
     if (A)
       for (var Oe = w ? 3 : 1, De = function(U) {
-        var ve = c.find(function(Ee) {
+        var ve = f.find(function(Ee) {
           var Q = g.get(Ee);
           if (Q)
             return Q.slice(0, U).every(function($e) {
@@ -712,8 +712,8 @@ function An(e) {
         });
         if (ve)
           return T = ve, "break";
-      }, fe = Oe; fe > 0; fe--) {
-        var xe = De(fe);
+      }, ce = Oe; ce > 0; ce--) {
+        var xe = De(ce);
         if (xe === "break")
           break;
       }
@@ -819,7 +819,7 @@ function Bn(e) {
     rootBoundary: p,
     padding: d,
     altBoundary: l
-  }), E = V(t.placement), O = ue(t.placement), x = !O, c = We(E), f = $n(c), v = t.modifiersData.popperOffsets, g = t.rects.reference, A = t.rects.popper, T = typeof m == "function" ? m(Object.assign({}, t.rects, {
+  }), E = V(t.placement), O = ue(t.placement), x = !O, f = We(E), c = $n(f), v = t.modifiersData.popperOffsets, g = t.rects.reference, A = t.rects.popper, T = typeof m == "function" ? m(Object.assign({}, t.rects, {
     placement: t.placement
   })) : m, k = typeof T == "number" ? {
     mainAxis: T,
@@ -833,15 +833,15 @@ function Bn(e) {
   };
   if (!!v) {
     if (a) {
-      var N, le = c === "y" ? P : L, ce = c === "y" ? B : I, C = c === "y" ? "height" : "width", j = v[c], we = j + b[le], K = j - b[ce], Oe = h ? -A[C] / 2 : 0, De = O === oe ? g[C] : A[C], fe = O === oe ? -A[C] : -g[C], xe = t.elements.arrow, ee = h && xe ? Me(xe) : {
+      var N, le = f === "y" ? P : L, fe = f === "y" ? B : I, C = f === "y" ? "height" : "width", j = v[f], we = j + b[le], K = j - b[fe], Oe = h ? -A[C] / 2 : 0, De = O === oe ? g[C] : A[C], ce = O === oe ? -A[C] : -g[C], xe = t.elements.arrow, ee = h && xe ? Me(xe) : {
         width: 0,
         height: 0
-      }, U = t.modifiersData["arrow#persistent"] ? t.modifiersData["arrow#persistent"].padding : Ot(), ve = U[le], Ee = U[ce], Q = de(0, g[C], ee[C]), $e = x ? g[C] / 2 - Oe - Q - ve - k.mainAxis : De - Q - ve - k.mainAxis, kt = x ? -g[C] / 2 + Oe + Q + Ee + k.mainAxis : fe + Q + Ee + k.mainAxis, Be = t.elements.arrow && be(t.elements.arrow), Rt = Be ? c === "y" ? Be.clientTop || 0 : Be.clientLeft || 0 : 0, Ue = (N = S == null ? void 0 : S[c]) != null ? N : 0, Pt = j + $e - Ue - Rt, Lt = j + kt - Ue, Xe = de(h ? Le(we, Pt) : we, j, h ? _(K, Lt) : K);
-      v[c] = Xe, R[c] = Xe - j;
+      }, U = t.modifiersData["arrow#persistent"] ? t.modifiersData["arrow#persistent"].padding : Ot(), ve = U[le], Ee = U[fe], Q = de(0, g[C], ee[C]), $e = x ? g[C] / 2 - Oe - Q - ve - k.mainAxis : De - Q - ve - k.mainAxis, kt = x ? -g[C] / 2 + Oe + Q + Ee + k.mainAxis : ce + Q + Ee + k.mainAxis, Be = t.elements.arrow && be(t.elements.arrow), Rt = Be ? f === "y" ? Be.clientTop || 0 : Be.clientLeft || 0 : 0, Ue = (N = S == null ? void 0 : S[f]) != null ? N : 0, Pt = j + $e - Ue - Rt, Lt = j + kt - Ue, Xe = de(h ? Le(we, Pt) : we, j, h ? _(K, Lt) : K);
+      v[f] = Xe, R[f] = Xe - j;
     }
     if (u) {
-      var ze, Nt = c === "x" ? P : L, Ct = c === "x" ? B : I, J = v[f], Se = f === "y" ? "height" : "width", Ke = J + b[Nt], Qe = J - b[Ct], Ie = [P, L].indexOf(E) !== -1, Je = (ze = S == null ? void 0 : S[f]) != null ? ze : 0, Ze = Ie ? Ke : J - g[Se] - A[Se] - Je + k.altAxis, _e = Ie ? J + g[Se] + A[Se] - Je - k.altAxis : Qe, et = h && Ie ? on(Ze, J, _e) : de(h ? Ze : Ke, J, h ? _e : Qe);
-      v[f] = et, R[f] = et - J;
+      var ze, Nt = f === "x" ? P : L, Ct = f === "x" ? B : I, J = v[c], Se = c === "y" ? "height" : "width", Ke = J + b[Nt], Qe = J - b[Ct], Ie = [P, L].indexOf(E) !== -1, Je = (ze = S == null ? void 0 : S[c]) != null ? ze : 0, Ze = Ie ? Ke : J - g[Se] - A[Se] - Je + k.altAxis, _e = Ie ? J + g[Se] + A[Se] - Je - k.altAxis : Qe, et = h && Ie ? on(Ze, J, _e) : de(h ? Ze : Ke, J, h ? _e : Qe);
+      v[c] = et, R[c] = et - J;
     }
     t.modifiersData[r] = R;
   }
@@ -990,7 +990,7 @@ function Xn(e) {
     return t[n];
   });
 }
-var ct = "Popper: Invalid reference or popper argument provided. They must be either a DOM element or virtual element.", zn = "Popper: An infinite loop in the modifiers cycle has been detected! The cycle has been interrupted to prevent a browser crash.", ft = {
+var ft = "Popper: Invalid reference or popper argument provided. They must be either a DOM element or virtual element.", zn = "Popper: An infinite loop in the modifiers cycle has been detected! The cycle has been interrupted to prevent a browser crash.", ct = {
   placement: "bottom",
   modifiers: [],
   strategy: "absolute"
@@ -1004,13 +1004,13 @@ function vt() {
 }
 function Kn(e) {
   e === void 0 && (e = {});
-  var t = e, n = t.defaultModifiers, r = n === void 0 ? [] : n, o = t.defaultOptions, a = o === void 0 ? ft : o;
+  var t = e, n = t.defaultModifiers, r = n === void 0 ? [] : n, o = t.defaultOptions, a = o === void 0 ? ct : o;
   return function(u, i, p) {
     p === void 0 && (p = a);
     var l = {
       placement: "bottom",
       orderedModifiers: [],
-      options: Object.assign({}, ft, a),
+      options: Object.assign({}, ct, a),
       modifiersData: {},
       elements: {
         reference: u,
@@ -1030,16 +1030,16 @@ function Kn(e) {
         if (l.orderedModifiers = x.filter(function(S) {
           return S.enabled;
         }), process.env.NODE_ENV !== "production") {
-          var c = Un([].concat(x, l.options.modifiers), function(S) {
+          var f = Un([].concat(x, l.options.modifiers), function(S) {
             var R = S.name;
             return R;
           });
-          if (Yn(c), V(l.options.placement) === Ne) {
-            var f = l.orderedModifiers.find(function(S) {
+          if (Yn(f), V(l.options.placement) === Ne) {
+            var c = l.orderedModifiers.find(function(S) {
               var R = S.name;
               return R === "flip";
             });
-            f || console.error(['Popper: "auto" placements require the "flip" modifier be', "present and enabled to work."].join(" "));
+            c || console.error(['Popper: "auto" placements require the "flip" modifier be', "present and enabled to work."].join(" "));
           }
           var v = F(i), g = v.marginTop, A = v.marginRight, T = v.marginBottom, k = v.marginLeft;
           [g, A, T, k].some(function(S) {
@@ -1052,7 +1052,7 @@ function Kn(e) {
         if (!y) {
           var E = l.elements, O = E.reference, x = E.popper;
           if (!vt(O, x)) {
-            process.env.NODE_ENV !== "production" && console.error(ct);
+            process.env.NODE_ENV !== "production" && console.error(ft);
             return;
           }
           l.rects = {
@@ -1061,16 +1061,16 @@ function Kn(e) {
           }, l.reset = !1, l.placement = l.options.placement, l.orderedModifiers.forEach(function(S) {
             return l.modifiersData[S.name] = Object.assign({}, S.data);
           });
-          for (var c = 0, f = 0; f < l.orderedModifiers.length; f++) {
-            if (process.env.NODE_ENV !== "production" && (c += 1, c > 100)) {
+          for (var f = 0, c = 0; c < l.orderedModifiers.length; c++) {
+            if (process.env.NODE_ENV !== "production" && (f += 1, f > 100)) {
               console.error(zn);
               break;
             }
             if (l.reset === !0) {
-              l.reset = !1, f = -1;
+              l.reset = !1, c = -1;
               continue;
             }
-            var v = l.orderedModifiers[f], g = v.fn, A = v.options, T = A === void 0 ? {} : A, k = v.name;
+            var v = l.orderedModifiers[c], g = v.fn, A = v.options, T = A === void 0 ? {} : A, k = v.name;
             typeof g == "function" && (l = g({
               state: l,
               options: T,
@@ -1090,22 +1090,22 @@ function Kn(e) {
       }
     };
     if (!vt(u, i))
-      return process.env.NODE_ENV !== "production" && console.error(ct), h;
+      return process.env.NODE_ENV !== "production" && console.error(ft), h;
     h.setOptions(p).then(function(b) {
       !y && p.onFirstUpdate && p.onFirstUpdate(b);
     });
     function w() {
       l.orderedModifiers.forEach(function(b) {
-        var E = b.name, O = b.options, x = O === void 0 ? {} : O, c = b.effect;
-        if (typeof c == "function") {
-          var f = c({
+        var E = b.name, O = b.options, x = O === void 0 ? {} : O, f = b.effect;
+        if (typeof f == "function") {
+          var c = f({
             state: l,
             name: E,
             instance: h,
             options: x
           }), v = function() {
           };
-          d.push(f || v);
+          d.push(c || v);
         }
       });
     }
@@ -1214,7 +1214,7 @@ var ar = or;
 const ir = ["id"], sr = {
   key: 0,
   class: "v-step__header"
-}, ur = ["innerHTML"], lr = { class: "v-step__content" }, cr = ["innerHTML"], fr = { key: 1 }, vr = { class: "v-step__buttons" }, pr = { name: "v-step" }, dr = /* @__PURE__ */ ht({
+}, ur = ["innerHTML"], lr = { class: "v-step__content" }, fr = ["innerHTML"], cr = { key: 1 }, vr = { class: "v-step__buttons" }, pr = { name: "v-step" }, dt = /* @__PURE__ */ ht({
   ...pr,
   props: {
     target: null,
@@ -1294,15 +1294,15 @@ const ir = ["id"], sr = {
         e.title ? (M(), Y("div", sr, [
           Ae("div", { innerHTML: e.title }, null, 8, ur)
         ])) : re("", !0)
-      ], !0),
+      ]),
       Re(d.$slots, "content", {}, () => [
         Ae("div", lr, [
           e.content ? (M(), Y("div", {
             key: 0,
             innerHTML: e.content
-          }, null, 8, cr)) : (M(), Y("div", fr, "props is a demo step! The id of props step is " + te($(n)) + " and it targets " + te(e.target) + ".", 1))
+          }, null, 8, fr)) : (M(), Y("div", cr, "props is a demo step! The id of props step is " + te($(n)) + " and it targets " + te(e.target) + ".", 1))
         ])
-      ], !0),
+      ]),
       Re(d.$slots, "actions", {}, () => {
         var h, w, m, b;
         return [
@@ -1329,22 +1329,17 @@ const ir = ["id"], sr = {
             }, te(e.buttons.buttonStop), 1)) : re("", !0)
           ])
         ];
-      }, !0),
+      }),
       Ae("div", {
         class: Vt(["v-step__arrow", { "v-step__arrow--dark": !!e.title }])
       }, null, 2)
     ], 8, ir));
   }
 });
-const hr = (e, t) => {
-  const n = e.__vccOpts || e;
-  for (const [r, o] of t)
-    n[r] = o;
-  return n;
-}, dt = /* @__PURE__ */ hr(dr, [["__scopeId", "data-v-5198d919"]]), gr = (e) => {
+const hr = (e) => {
   const t = {};
   e.config.globalProperties.$tours = t, e.component(tt.name, tt), e.component(dt.name, dt);
 };
 export {
-  gr as default
+  hr as default
 };
