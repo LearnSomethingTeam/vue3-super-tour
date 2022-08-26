@@ -214,11 +214,11 @@ onUnmounted(() => {
     }
   }
 
-  .v-step[x-placement^="top"] {
+  .v-step[data-popper-placement^="top"] {
     margin-bottom: 0.5rem;
   }
 
-  .v-step[x-placement^="top"] .v-step__arrow {
+  .v-step[data-popper-placement^="top"] .v-step__arrow {
     border-width: 0.5rem 0.5rem 0 0.5rem;
     border-left-color: transparent;
     border-right-color: transparent;
@@ -229,11 +229,11 @@ onUnmounted(() => {
     margin-bottom: 0;
   }
 
-  .v-step[x-placement^="bottom"] {
+  .v-step[data-popper-placement^="bottom"] {
     margin-top: 0.5rem;
   }
 
-  .v-step[x-placement^="bottom"] .v-step__arrow {
+  .v-step[data-popper-placement^="bottom"] .v-step__arrow {
     border-width: 0 0.5rem 0.5rem 0.5rem;
     border-left-color: transparent;
     border-right-color: transparent;
@@ -244,11 +244,11 @@ onUnmounted(() => {
     margin-bottom: 0;
   }
 
-  .v-step[x-placement^="right"] {
+  .v-step[data-popper-placement^="right"] {
     margin-left: 0.5rem;
   }
 
-  .v-step[x-placement^="right"] .v-step__arrow {
+  .v-step[data-popper-placement^="right"] .v-step__arrow {
     border-width: 0.5rem 0.5rem 0.5rem 0;
     border-left-color: transparent;
     border-top-color: transparent;
@@ -259,11 +259,11 @@ onUnmounted(() => {
     margin-right: 0;
   }
 
-  .v-step[x-placement^="left"] {
+  .v-step[data-popper-placement^="left"] {
     margin-right: 0.5rem;
   }
 
-  .v-step[x-placement^="left"] .v-step__arrow {
+  .v-step[data-popper-placement^="left"] .v-step__arrow {
     border-width: 0.5rem 0 0.5rem 0.5rem;
     border-top-color: transparent;
     border-right-color: transparent;
