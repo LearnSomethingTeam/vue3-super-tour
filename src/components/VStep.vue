@@ -186,7 +186,7 @@ onUnmounted(() => {
 })
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
   .v-step {
     background: #50596c; /* #ffc107, #35495e */
     color: white;
