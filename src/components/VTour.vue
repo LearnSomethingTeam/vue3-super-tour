@@ -30,6 +30,7 @@
         :highlight="highlight"
         :stop-on-fail="stopOnTargetNotFound"
         :debug="debug"
+        :arrow="step.arrow"
 
         @prev="previousStep"
         @next="nextStep"
