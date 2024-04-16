@@ -31,6 +31,7 @@ export interface Step {
   highlight?: boolean;
   stopOnFail?: boolean;
   debug?: boolean;
+  arrow?: boolean; // whether or not to show the arrow on the step
 
   /** Called if finish is chosen on this step */
   finish?: () => void | Promise<void>;
