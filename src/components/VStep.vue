@@ -205,6 +205,7 @@ onUnmounted(() => {
       position: absolute;
       margin: 0.5rem;
       border-color: #50596c; /* #ffc107, #35495e */
+      display: none;
 
       &--dark {
         border-color: #454d5d;
