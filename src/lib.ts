@@ -31,6 +31,7 @@ export interface Step {
   highlight?: boolean;
   stopOnFail?: boolean;
   debug?: boolean;
+  arrow?: boolean; // whether or not to show the arrow on the step
 
   /** Called if finish is chosen on this step */
   finish?: () => void | Promise<void>;
@@ -126,6 +127,6 @@ export default (app: App) => {
   const tours: Record<string,TourState> = {};
   app.config.globalProperties.$tours = tours;
 
-  app.component(VTour.name, VTour)
-  app.component(VStep.name, VStep)
+  app.component(VTour.name ? VTour.name : '', VTour)
+  app.component(VStep.name ? VStep.name : '', VStep)
 }

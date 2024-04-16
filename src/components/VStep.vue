@@ -22,7 +22,7 @@
         </div>
       </slot>
 
-      <div class="v-step__arrow" :class="{ 'v-step__arrow--dark': !!title }"></div>
+      <div v-if="arrow || !!title" class="v-step__arrow" :class="{ 'v-step__arrow--dark': !!title }"></div>
     </div>
 </template>
 
@@ -65,6 +65,7 @@ const {
   highlight,
   stopOnFail,
   debug,
+  arrow,
 
   // These actually get handled by VTour
   // finish,
