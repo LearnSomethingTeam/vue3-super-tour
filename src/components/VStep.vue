@@ -237,6 +237,7 @@ onUnmounted(() => {
         border-right-color: transparent;
         border-top-color: transparent;
         top: -0.5rem;
+        display: none;
         left: calc(50% - 1rem);
         margin-top: 0;
         margin-bottom: 0;
