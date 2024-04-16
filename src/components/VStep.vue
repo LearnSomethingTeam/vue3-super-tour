@@ -22,7 +22,7 @@
         </div>
       </slot>
 
-      <!-- <div v-if="arrow || !!title" class="v-step__arrow" :class="{ 'v-step__arrow--dark': !!title }"></div> -->
+      <div v-if="arrow || !!title" class="v-step__arrow" :class="{ 'v-step__arrow--dark': !!title }"></div>
     </div>
 </template>
 
@@ -203,6 +203,7 @@ onUnmounted(() => {
       height: 0;
       border-style: solid;
       position: absolute;
+      visibility: hidden;
       margin: 0.5rem;
       border-color: #50596c; /* #ffc107, #35495e */
       display: none;
