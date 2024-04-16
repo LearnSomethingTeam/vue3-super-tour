@@ -56,6 +56,7 @@ import { KEYS } from '../constants'
 const emit = defineEmits<{
   (e: 'start', stepIdx: number): void;
   (e: 'stop', stepIdx: number): void;
+  (e: 'step', stepIdx: number): void;
   (e: 'show', stepIdx: number): void;
   (e: 'hide', stepIdx: number): void;
   (e: 'skip', stepIdx: number): void;

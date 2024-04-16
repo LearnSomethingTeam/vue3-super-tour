@@ -203,10 +203,8 @@ onUnmounted(() => {
       height: 0;
       border-style: solid;
       position: absolute;
-      visibility: hidden;
       margin: 0.5rem;
       border-color: #50596c; /* #ffc107, #35495e */
-      display: none;
 
       &--dark {
         border-color: #454d5d;
@@ -237,7 +235,6 @@ onUnmounted(() => {
         border-right-color: transparent;
         border-top-color: transparent;
         top: -0.5rem;
-        display: none;
         left: calc(50% - 1rem);
         margin-top: 0;
         margin-bottom: 0;

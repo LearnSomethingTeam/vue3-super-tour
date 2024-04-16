@@ -127,6 +127,6 @@ export default (app: App) => {
   const tours: Record<string,TourState> = {};
   app.config.globalProperties.$tours = tours;
 
-  app.component(VTour.name, VTour)
-  app.component(VStep.name, VStep)
+  app.component(VTour.name ? VTour.name : '', VTour)
+  app.component(VStep.name ? VStep.name : '', VStep)
 }
