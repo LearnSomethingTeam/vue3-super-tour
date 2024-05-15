@@ -1,6 +1,6 @@
 {
   "name": "vue3-super-tour",
-  "version": "0.9.0",
+  "version": "0.9.1",
   "scripts": {
     "check": "vue-tsc --noEmit",
     "dev": "vite",
@@ -11,7 +11,7 @@
     "@popperjs/core": "^2.11.5",
     "hash-sum": "^2.0.0",
     "jump.js": "^1.0.2",
-    "vue": "^3.4.23"
+    "vue": "^3.4.27"
   },
   "devDependencies": {
     "@types/hash-sum": "^1.0.0",
